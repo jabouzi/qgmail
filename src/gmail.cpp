@@ -28,12 +28,12 @@ void Gmail::createTrayIcon()
     trayIcon->show();    
     trayIcon->setContextMenu(trayIconMenu);        
     trayIconMenu->addAction(show_action); 
-    trayIconMenu->addAction(quitAction);     
+    trayIconMenu->addAction(quitAction);    
 }
 
 void Gmail::show_()
 {    
     gm->setWindowFlags(Qt::ToolTip);
     gm->init();   
-    gm->show();
+    gm->show_();
 }

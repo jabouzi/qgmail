@@ -12,14 +12,22 @@ Q_OBJECT
 public:
     GmailImpl( QWidget * parent = 0);
     void init();   
+    void show_();
     
 private:
-    void adjustWindow();
+    void adjustWindow();    
+    void startTimer(int);
     QRect rect;
     qreal opac;
     QRegion region;    
     QDesktopWidget *desktop;
     QSize windowSize;     
+    int x;
+    int y;
+    int repeat;
+    QTimer * timer;
+private slots:
+    void moveWindow();
 };
 #endif
 
