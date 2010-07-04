@@ -1,18 +1,18 @@
-#ifndef GMAILIMPL_H
-#define GMAILIMPL_H
+#ifndef GMAILWIDGET_H
+#define GMAILWIDGET_H
 //
 #include <QtGui>
 #include <QString>
 #include <QRect>
 #include "ui_gmail.h"
 //
-class GmailImpl : public QWidget, public Ui::Gmail
+class GmailWidget : public QWidget, public Ui::Gmail
 {
 Q_OBJECT
 public:
-    GmailImpl( QWidget * parent = 0);
-    void init();   
-    void show_();
+    GmailWidget( QWidget * parent = 0);
+    void init(QString);   
+    void showWidget();
     
 private:
     void adjustWindow();    
@@ -24,10 +24,17 @@ private:
     QSize windowSize;     
     int x;
     int y;
+    int screenWidth, width; 
+    int screenHeight, height;
     int repeat;
     QTimer * timer;
-private slots:
+    
+public slots:
     void moveWindow();
+    void moveUp();
+    
+private slots:
+    void moveDown();
 };
 #endif
 

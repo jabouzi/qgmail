@@ -1,39 +1,111 @@
-#include <QtGui>
-
 #include "gmail.h"
-//
-Gmail::Gmail()    
+
+Gmail::Gmail(QObject* parent) :
+    QObject(parent)
+{              
+    connect(&http, SIGNAL(readyRead(QHttpResponseHeader)),
+             this, SLOT(readData(QHttpResponseHeader)));     
+}
+
+void Gmail::init()
 {
-    path = QCoreApplication::applicationDirPath();
-    if (path.data()[path.size() - 1] != '/') path += "/";
-    trayIcon = new QSystemTrayIcon(this); 
-    trayIconMenu = new QMenu(this);     
-    createActions();
-    createTrayIcon();       
-    gm = new GmailImpl();    
+    new_emails = false;
+    currentCount = 0;
+    xml.clear();
+    emailsList.clear();
 }
 
-void Gmail::createActions()
+void Gmail::connection()
 {
-    show_action = new QAction(tr("Show"), this);
-    connect(show_action, SIGNAL(triggered()), this, SLOT(show_()));   
-    
-    quitAction = new QAction(tr("&Quit"), this);
-    connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));  
+    init();
+    http.setHost("mail.google.com", QHttp::ConnectionModeHttps);
+    http.setUser("jabouzi", "7024043");
+    http.get("/mail/feed/atom");    
 }
 
-void Gmail::createTrayIcon()
-{      
-    trayIcon->setIcon(QIcon(path+"images/gmail0.png"));
-    trayIcon->show();    
-    trayIcon->setContextMenu(trayIconMenu);        
-    trayIconMenu->addAction(show_action); 
-    trayIconMenu->addAction(quitAction);    
+void Gmail::readData(const QHttpResponseHeader &resp)
+{
+    if (resp.statusCode() != 200)
+    {
+        http.abort();
+        emit(noConnection());
+    }
+    else {
+        xml.addData(http.readAll());
+        getEmails();
+    }
 }
 
-void Gmail::show_()
-{    
-    gm->setWindowFlags(Qt::ToolTip);
-    gm->init();   
-    gm->show_();
+void Gmail::getEmails()
+{
+    while (!xml.atEnd()) {
+        xml.readNext();
+        if (xml.isStartElement()) {                  
+            currentTag = xml.name().toString();    
+        } else if (xml.isEndElement()) {          
+            if (xml.name() == "entry")
+            {
+                if (!emailsIds.contains(emailId))
+                {
+                    emailsIds << emailId;
+                    emailsList << emailDetails;
+                }
+            }
+            else if (xml.name() == "feed")
+            {
+                emit(finished());
+            }
+            
+        } else if (xml.isCharacters() && !xml.isWhitespace()) {
+            if (currentTag == "fullcount")
+            {               
+                bool ok;
+                emailsCount = xml.text().toString().toInt(&ok);
+                if (emailsCount > currentCount)
+                {
+                    currentCount = emailsCount;     
+                    new_emails = true;   
+                    emit(newEmails());                                
+                }         
+                else
+                {
+                    new_emails = false;
+                    emit(noNewEmails());    
+                }      
+            }
+            if (new_emails) 
+            {        
+                if (currentTag == "id")
+                {
+                   emailId = xml.text().toString();                    
+                }
+                if (currentTag == "title")
+                {
+                    emailDetails.title = xml.text().toString();                    
+                }
+                else if (currentTag == "summary")
+                {
+                    emailDetails.summary = xml.text().toString();                    
+                }
+                else if (currentTag == "name")
+                {
+                    emailDetails.name = xml.text().toString();                    
+                }
+                else if (currentTag == "email")
+                {
+                    emailDetails.email = xml.text().toString();                    
+                }               
+            }            
+        }
+    }
+    if (xml.error() && xml.error() != QXmlStreamReader::PrematureEndOfDocumentError) {
+        qWarning() << "XML ERROR:" << xml.lineNumber() << ": " << xml.errorString();
+        http.abort();
+    }    
 }
+
+QList< emailStruct > Gmail::getNewEmails()
+{   
+    return emailsList;    
+}
+
