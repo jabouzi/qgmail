@@ -20,7 +20,8 @@ void QtGmail::init()
 {
     gmwt->setWindowFlags(Qt::ToolTip);
     gmwt->init(path);   
-    gm->connection();
+    gm->init();
+    gm->initLogin(path);
     timer->start(10000);
 }
 

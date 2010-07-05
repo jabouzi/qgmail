@@ -7,6 +7,7 @@
 #include <QString>
 #include "gmailWidget.h"
 #include "gmail.h"
+
 //
 class QtGmail : public QWidget
 {

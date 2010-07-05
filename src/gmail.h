@@ -5,6 +5,7 @@
 #include <QtNetwork>
 #include <QXmlStreamReader>
 #include <QtSql>
+#include "login.h"
 
 struct emailStruct {
     QString title;
@@ -18,15 +19,15 @@ class Gmail : public QObject
   Q_OBJECT     
     public:
         Gmail(QObject* = 0); 
-        void connection();   
-        QList< emailStruct > getNewEmails(); 
-        
+        void init();
+        void initLogin(QString);      
+        void connection();  
+        QList< emailStruct > getNewEmails();         
         emailStruct emailDetails;
         QList< emailStruct > emailsList;
                  
     
-    private:    
-        void init();
+    private:   
         void getEmails();
         int emailsCount;    
         int currentCount;
@@ -36,11 +37,13 @@ class Gmail : public QObject
         QHttp http;     
         QString currentTag;
         QString emailId;
-        QStringList emailsIds;        
+        QStringList emailsIds;   
+        Login login; 
+        user_data p_Data;    
         
     private slots:        
         void readData(const QHttpResponseHeader &);    
-        
+        void doConnection();
         
     signals:   
         void finished();

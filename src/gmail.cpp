@@ -3,8 +3,8 @@
 Gmail::Gmail(QObject* parent) :
     QObject(parent)
 {              
-    connect(&http, SIGNAL(readyRead(QHttpResponseHeader)),
-             this, SLOT(readData(QHttpResponseHeader)));     
+    connect(&http, SIGNAL(readyRead(QHttpResponseHeader)),this, SLOT(readData(QHttpResponseHeader))); 
+    connect(&login, SIGNAL(loginClicked()),this, SLOT(doConnection())); 
 }
 
 void Gmail::init()
@@ -12,14 +12,20 @@ void Gmail::init()
     new_emails = false;
     currentCount = 0;
     xml.clear();
-    emailsList.clear();
+    emailsList.clear();   
+}
+
+void Gmail::initLogin(QString path)
+{      
+    login.setPath(path);
+    login.showWindow();    
 }
 
 void Gmail::connection()
-{
-    init();
+{    
+    init();    
     http.setHost("mail.google.com", QHttp::ConnectionModeHttps);
-    http.setUser("jabouzi", "7024043");
+    http.setUser(p_Data.username, p_Data.password);
     http.get("/mail/feed/atom");    
 }
 
@@ -108,4 +114,11 @@ QList< emailStruct > Gmail::getNewEmails()
 {   
     return emailsList;    
 }
+
+void Gmail::doConnection()
+{
+    p_Data = login.getUsernamePassword();
+    connection();
+}
+
 
