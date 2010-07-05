@@ -32,6 +32,8 @@ class Gmail : public QObject
         int emailsCount;    
         int currentCount;
         int connectionId;
+        QString username;
+        QString password;
         bool new_emails;
         QXmlStreamReader xml;  
         QHttp http;     
@@ -39,7 +41,6 @@ class Gmail : public QObject
         QString emailId;
         QStringList emailsIds;   
         Login login; 
-        user_data p_Data;    
         
     private slots:        
         void readData(const QHttpResponseHeader &);    

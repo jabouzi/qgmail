@@ -22,11 +22,12 @@ void QtGmail::init()
     gmwt->init(path);   
     gm->init();
     gm->initLogin(path);
-    timer->start(10000);
+    timer->start(600000);
 }
 
 void QtGmail::createActions()
 {
+    /*TODO check now*/
     show_action = new QAction(tr("Show"), this);
     connect(show_action, SIGNAL(triggered()), this, SLOT(showWidget()));   
     
@@ -104,7 +105,7 @@ void QtGmail::displayNewEmails()
 void QtGmail::startTimer()
 {
     timer->stop();    
-    timer->start(30000);
+    timer->start(600000);
 }
 
 

@@ -2,7 +2,6 @@
 #define LOGIN_H
 
 #include <QtGui>
-#include "userdata.h"
 #include "ui_login.h"
 
 class Login : public QDialog, public Ui::Login
@@ -13,22 +12,22 @@ public:
     void setPath(QString);
     void init();
     void showWindow();
-    user_data getUsernamePassword();
+    QString getUsername();
+    QString getPassword();
 
 protected:
     void closeEvent(QCloseEvent *);
     
 private:
     void setActions();
+    void writeData();
+    void readData();
     QString username;
     QString password;
     QString path;
-    Userdata ud;
-    user_data p_Data;    
     
 private slots:
     void showPassword();
-    void savePassword();
     void doLogin();       
     
 signals:

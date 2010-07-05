@@ -25,7 +25,7 @@ void Gmail::connection()
 {    
     init();    
     http.setHost("mail.google.com", QHttp::ConnectionModeHttps);
-    http.setUser(p_Data.username, p_Data.password);
+    http.setUser(username, password);
     http.get("/mail/feed/atom");    
 }
 
@@ -117,7 +117,8 @@ QList< emailStruct > Gmail::getNewEmails()
 
 void Gmail::doConnection()
 {
-    p_Data = login.getUsernamePassword();
+    username = login.getUsername();
+    password = login.getPassword();
     connection();
 }
 
