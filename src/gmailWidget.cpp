@@ -33,39 +33,39 @@ void GmailWidget::adjustWindow(){
     QRect rec2 = desktop->screenGeometry (0);         
     screenWidth = desktop->width(); 
     screenHeight = desktop->height();
-    qDebug("Screen  => H : %d, W : %d",screenWidth,screenHeight);  
+    qDebug("Screen  => W : %d, H : %d",screenWidth,screenHeight);  
     windowSize = size();      
     width = windowSize.width(); 
     height = windowSize.height(); 
-    qDebug("Widget => H : %d, W : %d",width,height);   
-    qDebug("Rec1 => H : %d, W : %d",rec1.width() ,rec1.height() );  
-    qDebug("Rec2 => H : %d, W : %d",rec2.width() ,rec2.height() );  
+    qDebug("Widget => W : %d, H : %d",width,height);   
+    qDebug("Rec1 => W : %d, H : %d",rec1.width() ,rec1.height() );  
+    qDebug("Rec2 => W : %d, H : %d",rec2.width() ,rec2.height() );  
     x = (screenWidth - width);
     y = (screenHeight - height);
-    qDebug("XY => H : %d, W : %d",x ,y );
+    qDebug("XY => W : %d, H : %d",x ,y );
     int diff1 = rec2.height() - rec1.height();
     int diff2 = rec2.width() - rec1.width();  
     qDebug("diff => H : %d, W : %d",diff1 ,diff2 );  
     qDebug("H : %d, W : %d",x+diff2 ,y+diff1);  
-    move (screenWidth, screenHeight);
+    move (918, 686);
 }
 
 void GmailWidget::moveWindow()
 {
-    repeat++;
-    qDebug("Repeat : %d ",repeat);    
-    if (repeat < 7)
-    {
-        moveUp();
-    }
-    else if (repeat >= 7 && repeat < 15)
-    {
-        moveDown();
-    }
-    else if (repeat >= 15)
-    {
-        timer->stop();
-    }
+    //~ repeat++;
+    //~ qDebug("Repeat : %d ",repeat);    
+    //~ if (repeat < 7)
+    //~ {
+        //~ moveUp();
+    //~ }
+    //~ else if (repeat >= 7 && repeat < 15)
+    //~ {
+        //~ moveDown();
+    //~ }
+    //~ else if (repeat >= 15)
+    //~ {
+        //~ timer->stop();
+    //~ }
 }
 
 void GmailWidget::moveUp()

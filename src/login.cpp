@@ -16,7 +16,11 @@ void  Login::showWindow()
     show();
     readData(); 
     usernameEdit->setText(username);
-    passwordEdit->setText(password); 
+    passwordEdit->setText(password);
+    if (username != "" and password != "") 
+    {
+        savePasswordCheck->setChecked(true);
+    }
    
 }
 
@@ -54,6 +58,10 @@ void Login::doLogin()
     {
         writeData();
     }
+    else
+    {
+        removeData();
+    }
     hide();
     emit(loginClicked());
 }
@@ -79,13 +87,22 @@ void Login::readData()
     in >> username >> password;     
 }
 
+void Login::removeData()
+{   
+    QFile file("gmail.dat");
+    file.open(QIODevice::WriteOnly);
+    QDataStream out(&file);   
+    out << QString("");   
+    out << QString("");   
+}
+
 QString Login::getUsername()
 {
-    return username;
+    return usernameEdit->text();
 }
 
 QString Login::getPassword()
 {
-    return password;
+    return passwordEdit->text();
 }
 

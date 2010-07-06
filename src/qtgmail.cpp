@@ -37,8 +37,23 @@ void QtGmail::createActions()
     movedown_action = new QAction(tr("Down"), this);
     connect(movedown_action, SIGNAL(triggered()), gmwt, SLOT(moveDown()));   
     
-    quitAction = new QAction(tr("&Quit"), this);
-    connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));  
+    viewinbox_action = new QAction(tr("View Inbox"), this);
+    connect(viewinbox_action, SIGNAL(triggered()), gmwt, SLOT(moveDown()));   
+    
+    checknow_action = new QAction(tr("Check Mail Now"), this);
+    connect(checknow_action, SIGNAL(triggered()), this, SLOT(checkEmails()));   
+    
+    tellmeagain_action = new QAction(tr("Tell me again..."), this);
+    connect(tellmeagain_action, SIGNAL(triggered()), gmwt, SLOT(moveDown()));   
+    
+    about_action = new QAction(tr("About"), this);
+    connect(about_action, SIGNAL(triggered()), gmwt, SLOT(moveDown()));   
+    
+    aboutqt_action = new QAction(tr("About QT"), this);
+    connect(aboutqt_action, SIGNAL(triggered()), gmwt, SLOT(moveDown()));   
+    
+    quitAction = new QAction(tr("Exit"), this);
+    connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));   
     
     connect(gm, SIGNAL(finished()), this, SLOT(displayNewEmails()));
     connect(gm, SIGNAL(newEmails()), this, SLOT(newEmails()));
@@ -55,6 +70,12 @@ void QtGmail::createTrayIcon()
     trayIconMenu->addAction(show_action); 
     trayIconMenu->addAction(moveup_action); 
     trayIconMenu->addAction(movedown_action); 
+    trayIconMenu->addAction(viewinbox_action); 
+    trayIconMenu->addAction(checknow_action); 
+    trayIconMenu->addAction(tellmeagain_action); 
+    trayIconMenu->addAction(about_action); 
+    trayIconMenu->addAction(aboutqt_action); 
+    trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);    
 }
 
@@ -84,14 +105,13 @@ void QtGmail::noConnection()
 
 void QtGmail::checkEmails()
 {
-    qDebug("time out");
     gm->connection(); 
 }
 
 void QtGmail::displayNewEmails()
 {
     emailsList = gm->getNewEmails();
-    qDebug(" You hane %d new emails : ",emailsList.size());
+    qDebug(" You have %d new emails : ",emailsList.size());
     for (int i = 0; i < emailsList.size(); i++)
     {       
         qDebug("Email # %d : ",i+1);

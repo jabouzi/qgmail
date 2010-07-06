@@ -29,6 +29,11 @@ private:
     QAction *show_action;
     QAction *moveup_action;
     QAction *movedown_action;
+    QAction *viewinbox_action; 
+    QAction *checknow_action; 
+    QAction *tellmeagain_action; 
+    QAction *about_action; 
+    QAction *aboutqt_action; 
     QString path;
     QTimer * timer;
     QList< emailStruct > emailsList;

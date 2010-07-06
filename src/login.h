@@ -22,6 +22,7 @@ private:
     void setActions();
     void writeData();
     void readData();
+    void removeData();
     QString username;
     QString password;
     QString path;
