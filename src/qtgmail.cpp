@@ -54,6 +54,7 @@ void QtGmail::createActions()
 
 void QtGmail::createTrayIcon()
 {      
+    /*tooltip avec le nombre d'emails*/
     trayIcon->setIcon(QIcon(path+"images/gmail2.png"));
     trayIcon->show();    
     trayIcon->setContextMenu(trayIconMenu);    
