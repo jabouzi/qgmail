@@ -54,7 +54,7 @@ void QtGmail::createActions()
 
 void QtGmail::createTrayIcon()
 {      
-    trayIcon->setIcon(QIcon(path+"images/gmail0.png"));
+    trayIcon->setIcon(QIcon(path+"images/gmail2.png"));
     trayIcon->show();    
     trayIcon->setContextMenu(trayIconMenu);    
     trayIconMenu->addAction(viewinbox_action); 
@@ -82,7 +82,7 @@ void QtGmail::newEmails()
 
 void QtGmail::noNewEmails()
 {
-    trayIcon->setIcon(QIcon(path+"images/gmail0.png"));
+    trayIcon->setIcon(QIcon(path+"images/gmail2.png"));
 }
 
 void QtGmail::noConnection()
