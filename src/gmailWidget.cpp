@@ -17,14 +17,16 @@ void GmailWidget::init(QString path)
     this->setWindowOpacity(opac);
     QImage image(path+"images/gmail4.png");
     label_3->setPixmap(QPixmap::fromImage(image));
-    adjustWindow();
+    //adjustWindow();
 } 
 
 void GmailWidget::showWidget()
 {
+    width = 362, height = 0, x = 918, y = 776;    
+    setGeometry(x,y,width,height);
     repeat = 0;
     show();
-    startTimer(80);
+    startTimer(90);
 }
 
 void GmailWidget::adjustWindow(){    
@@ -47,41 +49,48 @@ void GmailWidget::adjustWindow(){
     int diff2 = rec2.width() - rec1.width();  
     qDebug("diff => H : %d, W : %d",diff1 ,diff2 );  
     qDebug("H : %d, W : %d",x+diff2 ,y+diff1);  
-    move (918, 710);
+    x = 918;
+    y = 710;
+    move (x, y);
+    //setGeometry(x,y,0,0); 
 }
 
 void GmailWidget::moveWindow()
-{
-    //~ repeat++;
-    //~ qDebug("Repeat : %d ",repeat);    
-    //~ if (repeat < 7)
-    //~ {
-        //~ moveUp();
-    //~ }
-    //~ else if (repeat >= 7 && repeat < 15)
-    //~ {
-        //~ moveDown();
-    //~ }
-    //~ else if (repeat >= 15)
-    //~ {
-        //~ timer->stop();
-    //~ }
+{      
+    repeat++;
+    if (repeat < 7)
+    {
+        moveUp();
+    }
+    else if (repeat >= 7 && repeat < 20)
+    {
+        ;
+    }
+    else if (repeat >= 20 && repeat < 26)
+    {
+        moveDown();
+    }
+    else if (repeat >= 26)
+    {
+        timer->stop();
+    }
 }
 
 void GmailWidget::moveUp()
 {
-    y = y - 10;
-    height = height + 10;
+    y = y - 11;
+    height = height + 11;
     setGeometry(x,y,width,height);   
-    startTimer(80);    
+    startTimer(90); 
 }
 
 void GmailWidget::moveDown()
 {
-    y = y + 10;
-    height = height - 10;
+    y = y + 11;
+    height = height - 11;
     setGeometry(x,y,width,height);
-    startTimer(80);
+    startTimer(90);
+    //~ qDebug("Repeat D: %d - %d",y,height); 
 }
 
 void GmailWidget::startTimer(int time)

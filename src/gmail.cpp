@@ -12,6 +12,7 @@ void Gmail::init()
     new_emails = false;
     currentCount = 0;
     xml.clear();
+    totalEmailsList = emailsList;
     emailsList.clear();   
 }
 
@@ -37,7 +38,7 @@ void Gmail::readData(const QHttpResponseHeader &resp)
         emit(noConnection());
     }
     else {
-        xml.addData(http.readAll());
+        xml.addData(http.readAll());        
         getEmails();
     }
 }
@@ -108,6 +109,11 @@ void Gmail::getEmails()
         qWarning() << "XML ERROR:" << xml.lineNumber() << ": " << xml.errorString();
         http.abort();
     }    
+}
+
+QList< emailStruct > Gmail::getNewEmails()
+{   
+    return emailsList;    
 }
 
 QList< emailStruct > Gmail::getNewEmails()
