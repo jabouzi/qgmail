@@ -17,7 +17,8 @@ public:
 private:
     void adjustWindow();    
     void startTimer(int);
-    QRect rect;
+    QRect rec1;
+    QRect rec2;
     qreal opac;
     QRegion region;    
     QDesktopWidget *desktop;

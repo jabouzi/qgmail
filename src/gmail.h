@@ -23,7 +23,7 @@ class Gmail : public QObject
         void initLogin(QString);      
         void connection();  
         QList< emailStruct > getNewEmails();   
-        QList< emailStruct > getAllEmails();         
+        QList< emailStruct > getAllEmails(); 
         emailStruct emailDetails;
         QList< emailStruct > emailsList;
         QList< emailStruct > totalEmailsList;

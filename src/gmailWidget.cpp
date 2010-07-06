@@ -5,7 +5,6 @@ GmailWidget::GmailWidget( QWidget * parent)
 {
     setupUi(this);
     desktop = QApplication::desktop();
-    rect = desktop->availableGeometry(0);
     opac = 0.9;    
     repeat = 0;
     timer = new QTimer(this);
@@ -22,7 +21,17 @@ void GmailWidget::init(QString path)
 
 void GmailWidget::showWidget()
 {
-    width = 362, height = 0, x = 918, y = 776;    
+    label->setTextFormat(Qt::RichText);
+    QString text = "<b>Skander Jabouzi</b><br />";
+    text += "<b>Test</b><br />";
+    text += "<i>Ceci est un test</i><br />";
+    text += "<i>de email de gmail...</i>";
+    label->setText(text);
+    windowSize = size();      
+    width = windowSize.width(); 
+    height = windowSize.height(); 
+    QRect rec1 = desktop->screenGeometry (0);    
+    width = 362, height = 0, x = rec1.width() - width, y = rec1.height() - 24;    
     setGeometry(x,y,width,height);
     repeat = 0;
     show();
@@ -51,7 +60,7 @@ void GmailWidget::adjustWindow(){
     qDebug("H : %d, W : %d",x+diff2 ,y+diff1);  
     x = 918;
     y = 710;
-    move (x, y);
+    //move (x, y);
     //setGeometry(x,y,0,0); 
 }
 

@@ -16,39 +16,21 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>10</y>
-     <width>261</width>
-     <height>31</height>
+     <x>89</x>
+     <y>6</y>
+     <width>271</width>
+     <height>57</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <pointsize>8</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
+     <weight>50</weight>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
-    <string>skander jabouzi 6276A,  boul lavoisier, montreal, quebec</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>40</y>
-     <width>261</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>8</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>skander jabouzi 6276A,  boul lavoisier, montreal, quebec</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">

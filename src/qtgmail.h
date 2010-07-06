@@ -25,10 +25,7 @@ private:
     QMenu *trayIconMenu;
     GmailWidget * gmwt;
     Gmail * gm;
-    QAction *quitAction;
-    QAction *show_action;
-    QAction *moveup_action;
-    QAction *movedown_action;
+    QAction *quitAction;   
     QAction *viewinbox_action; 
     QAction *checknow_action; 
     QAction *tellmeagain_action; 
@@ -45,6 +42,8 @@ private slots:
     void noConnection();
     void checkEmails();
     void displayNewEmails();
+    void displayAllEmails();
+    void viewInbox();
     
 };
 #endif

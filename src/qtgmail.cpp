@@ -26,31 +26,21 @@ void QtGmail::init()
 }
 
 void QtGmail::createActions()
-{
-    /*TODO check now*/
-    show_action = new QAction(tr("Show"), this);
-    connect(show_action, SIGNAL(triggered()), this, SLOT(showWidget()));   
-    
-    moveup_action = new QAction(tr("Up"), this);
-    connect(moveup_action, SIGNAL(triggered()), gmwt, SLOT(moveUp()));  
-     
-    movedown_action = new QAction(tr("Down"), this);
-    connect(movedown_action, SIGNAL(triggered()), gmwt, SLOT(moveDown()));   
-    
+{    
     viewinbox_action = new QAction(tr("View Inbox"), this);
-    connect(viewinbox_action, SIGNAL(triggered()), gmwt, SLOT(moveDown()));   
+    connect(viewinbox_action, SIGNAL(triggered()), this, SLOT(viewInbox()));   
     
     checknow_action = new QAction(tr("Check Mail Now"), this);
     connect(checknow_action, SIGNAL(triggered()), this, SLOT(checkEmails()));   
     
-    tellmeagain_action = new QAction(tr("Tell me again..."), this);
-    connect(tellmeagain_action, SIGNAL(triggered()), gmwt, SLOT(moveDown()));   
+    tellmeagain_action = new QAction(tr("Tell me Again..."), this);
+    connect(tellmeagain_action, SIGNAL(triggered()), this, SLOT(displayAllEmails()));   
     
-    about_action = new QAction(tr("About"), this);
-    connect(about_action, SIGNAL(triggered()), gmwt, SLOT(moveDown()));   
+    about_action = new QAction(tr("About..."), this);
+    connect(about_action, SIGNAL(triggered()), this, SLOT(showWidget()));   
     
-    aboutqt_action = new QAction(tr("About QT"), this);
-    connect(aboutqt_action, SIGNAL(triggered()), gmwt, SLOT(moveDown()));   
+    aboutqt_action = new QAction(tr("About QT..."), this);
+    connect(aboutqt_action, SIGNAL(triggered()), this, SLOT(showWidget()));   
     
     quitAction = new QAction(tr("Exit"), this);
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));   
@@ -66,10 +56,7 @@ void QtGmail::createTrayIcon()
 {      
     trayIcon->setIcon(QIcon(path+"images/gmail0.png"));
     trayIcon->show();    
-    trayIcon->setContextMenu(trayIconMenu);        
-    trayIconMenu->addAction(show_action); 
-    trayIconMenu->addAction(moveup_action); 
-    trayIconMenu->addAction(movedown_action); 
+    trayIcon->setContextMenu(trayIconMenu);    
     trayIconMenu->addAction(viewinbox_action); 
     trayIconMenu->addAction(checknow_action); 
     trayIconMenu->addAction(tellmeagain_action); 
@@ -110,6 +97,7 @@ void QtGmail::checkEmails()
 
 void QtGmail::displayNewEmails()
 {
+    emailsList.clear();
     emailsList = gm->getNewEmails();
     qDebug(" You have %d new emails : ",emailsList.size());
     for (int i = 0; i < emailsList.size(); i++)
@@ -120,6 +108,28 @@ void QtGmail::displayNewEmails()
         qDebug("name : %s",emailsList.at(i).name.toLatin1().data());
         qDebug("email : %s",emailsList.at(i).email.toLatin1().data());
     }
+}
+
+void QtGmail::displayAllEmails()
+{
+    emailsList.clear();
+    emailsList = gm->getAllEmails();
+    qDebug(" You have %d new emails : ",emailsList.size());
+    for (int i = 0; i < emailsList.size(); i++)
+    {       
+        qDebug("Email # %d : ",i+1);
+        qDebug("title : %s",emailsList.at(i).title.toLatin1().data());
+        qDebug("summary : %s",emailsList.at(i).summary.toLatin1().data());
+        qDebug("name : %s",emailsList.at(i).name.toLatin1().data());
+        qDebug("email : %s",emailsList.at(i).email.toLatin1().data());
+    }
+}
+
+void QtGmail::viewInbox()
+{
+    QUrl url; 
+    url.setUrl("http://mail.google.com/mail/");
+    QDesktopServices::openUrl(url);
 }
 
 void QtGmail::startTimer()

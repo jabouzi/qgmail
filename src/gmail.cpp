@@ -113,12 +113,12 @@ void Gmail::getEmails()
 
 QList< emailStruct > Gmail::getNewEmails()
 {   
-    return emailsList;    
+    return emailsList;
 }
 
-QList< emailStruct > Gmail::getNewEmails()
+QList< emailStruct > Gmail::getAllEmails()
 {   
-    return emailsList;    
+    return totalEmailsList;
 }
 
 void Gmail::doConnection()
