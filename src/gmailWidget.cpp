@@ -47,7 +47,7 @@ void GmailWidget::adjustWindow(){
     int diff2 = rec2.width() - rec1.width();  
     qDebug("diff => H : %d, W : %d",diff1 ,diff2 );  
     qDebug("H : %d, W : %d",x+diff2 ,y+diff1);  
-    move (918, 686);
+    move (918, 710);
 }
 
 void GmailWidget::moveWindow()
