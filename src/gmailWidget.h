@@ -7,6 +7,17 @@
 #include "ui_gmail.h"
 #include "gmail.h"
 //
+
+struct emailDate {
+    int year;
+    int month;
+    int day;
+    QString shortMonth;
+    int hour;
+    int minute;
+    int second;
+};
+
 class GmailWidget : public QWidget, public Ui::Gmail
 {
 Q_OBJECT
@@ -20,6 +31,8 @@ private:
     void adjustWindow();    
     void startTimer(int);
     void setMessage(int);
+    void getEmailDate(int);
+    QString getTimeZoneOffset();
     QRect rec1;
     QRect rec2;
     qreal opac;
@@ -35,6 +48,7 @@ private:
     QTimer * timer;
     QTimer * timer2;
     QList< emailStruct > emailsList;
+    emailDate eDate;
     
 public slots:
     void moveWindow();

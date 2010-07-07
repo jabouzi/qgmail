@@ -119,8 +119,16 @@ void GmailWidget::showEmails()
 }
 
 void GmailWidget::setMessage(int index)
-{    
-    QString text = "<b>"+emailsList.at(index).name+"</b><br />";
+{        
+    QString printedDate;
+    getEmailDate(index);
+    QDate date = QDate::currentDate();
+    if (date.day() > eDate.day)
+        printedDate = eDate.shortMonth+" "+QString::number(eDate.day);
+    else
+        printedDate = QString::number(eDate.hour)+":"+QString::number(eDate.minute);
+    QString inboxSymbol = "»";
+    QString text = "<b style='color:red;'>"+QString::fromUtf8(inboxSymbol.toLatin1().data())+"</b>"+QString::number(index+1)+" of "+QString::number(emailsList.size())+" - "+printedDate+" <b>"+emailsList.at(index).name+"</b><br />";
     text += "<b>"+emailsList.at(index).title+"</b><br />";
     text += "<i>"+emailsList.at(index).summary+"</i><br />";
     label->setText(text);  
@@ -137,5 +145,33 @@ void GmailWidget::startTimer(int time)
     timer->start(time);
 }
 
+void GmailWidget::getEmailDate(int index)
+{
+    QDateTime dateTime0 = QDateTime::fromString(emailsList.at(index).issued, "yyyy-MM-ddTHH:mm:ssZ");
+    //~ int tz = getTimeZoneOffset();
+    QDateTime dateTime =  QDateTime::fromTime_t(dateTime0.toTime_t()+getTimeZoneOffset().toInt()*3600);
+    eDate.year = dateTime.date().year();
+    eDate.month = dateTime.date().month();
+    eDate.day = dateTime.date().day();
+    eDate.hour = dateTime.toLocalTime().time().hour();
+    eDate.minute = dateTime.time().minute();
+    eDate.second = dateTime.time().second();
+    eDate.shortMonth = dateTime.toString("MMM");
+}
 
-//
+QString GmailWidget::getTimeZoneOffset()
+{
+    QDateTime dt1 = QDateTime::currentDateTime();
+    QDateTime dt2 = dt1.toUTC();
+    dt1.setTimeSpec(Qt::UTC);
+    
+    int offset = dt2.secsTo(dt1) / 3600;
+
+    if (offset > 0)
+        return QString("+%1").arg(offset);
+    
+    return QString("%1").arg(offset);
+}
+
+
+//Your inbox contains no unread conversations.

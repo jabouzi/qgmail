@@ -10,6 +10,7 @@
 struct emailStruct {
     QString title;
     QString summary;
+    QString issued;
     QString name;
     QString email;
 };
@@ -37,6 +38,7 @@ class Gmail : public QObject
         QString username;
         QString password;
         bool new_emails;
+        bool entryTag;
         QXmlStreamReader xml;  
         QHttp http;     
         QString currentTag;

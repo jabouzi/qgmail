@@ -10,6 +10,7 @@ Gmail::Gmail(QObject* parent) :
 void Gmail::init()
 {
     new_emails = false;
+    entryTag = false;
     currentCount = 0;
     xml.clear();
     totalEmailsList.clear();
@@ -48,10 +49,15 @@ void Gmail::getEmails()
     while (!xml.atEnd()) {
         xml.readNext();
         if (xml.isStartElement()) {                  
-            currentTag = xml.name().toString();    
+            currentTag = xml.name().toString(); 
+            if (xml.name() == "entry")
+            {
+                entryTag = false;
+            }   
         } else if (xml.isEndElement()) {          
             if (xml.name() == "entry")
             {
+                entryTag = false;
                 totalEmailsList << emailDetails;
                 if (!emailsIds.contains(emailId))
                 {
@@ -64,7 +70,7 @@ void Gmail::getEmails()
                 emit(finished());
             }
             
-        } else if (xml.isCharacters() && !xml.isWhitespace()) {
+        } else if (xml.isCharacters() && !xml.isWhitespace()) {                      
             if (currentTag == "fullcount")
             {               
                 bool ok;
@@ -94,6 +100,10 @@ void Gmail::getEmails()
                 else if (currentTag == "summary")
                 {
                     emailDetails.summary = xml.text().toString();                    
+                }
+                else if (currentTag == "issued")
+                {
+                    emailDetails.issued = xml.text().toString();                    
                 }
                 else if (currentTag == "name")
                 {
