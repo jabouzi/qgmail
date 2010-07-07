@@ -12,8 +12,8 @@ void Gmail::init()
     new_emails = false;
     currentCount = 0;
     xml.clear();
-    totalEmailsList = emailsList;
-    emailsList.clear();   
+    totalEmailsList.clear();
+    emailsList.clear(); 
 }
 
 void Gmail::initLogin(QString path)
@@ -44,7 +44,7 @@ void Gmail::readData(const QHttpResponseHeader &resp)
 }
 
 void Gmail::getEmails()
-{
+{    
     while (!xml.atEnd()) {
         xml.readNext();
         if (xml.isStartElement()) {                  
@@ -52,10 +52,11 @@ void Gmail::getEmails()
         } else if (xml.isEndElement()) {          
             if (xml.name() == "entry")
             {
+                totalEmailsList << emailDetails;
                 if (!emailsIds.contains(emailId))
                 {
                     emailsIds << emailId;
-                    emailsList << emailDetails;
+                    emailsList << emailDetails;                    
                 }
             }
             else if (xml.name() == "feed")

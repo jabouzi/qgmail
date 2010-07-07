@@ -6,36 +6,35 @@ GmailWidget::GmailWidget( QWidget * parent)
     setupUi(this);
     desktop = QApplication::desktop();
     opac = 0.9;    
-    repeat = 0;
+    repeat = 0;    
     timer = new QTimer(this);
+    timer2 = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(moveWindow()));
+    connect(timer2, SIGNAL(timeout()), this, SLOT(showEmails()));
 }
 
 void GmailWidget::init(QString path)
-{
+{    
     this->setWindowOpacity(opac);
     QImage image(path+"images/gmail4.png");
     label_3->setPixmap(QPixmap::fromImage(image));
+    label->setTextFormat(Qt::RichText);
     //adjustWindow();
 } 
 
 void GmailWidget::showWidget()
 {
-    label->setTextFormat(Qt::RichText);
-    QString text = "<b>Skander Jabouzi</b><br />";
-    text += "<b>Test</b><br />";
-    text += "<i>Ceci est un test</i><br />";
-    text += "<i>de email de gmail...</i>";
-    label->setText(text);
+    setMessage(0);      
     windowSize = size();      
     width = windowSize.width(); 
     height = windowSize.height(); 
     QRect rec1 = desktop->screenGeometry (0);    
-    width = 362, height = 0, x = rec1.width() - width, y = rec1.height() - 24;    
+    height = 0, x = rec1.width() - width, y = rec1.height() - 24;    
     setGeometry(x,y,width,height);
     repeat = 0;
     show();
     startTimer(90);
+    emailIndex = 1;
 }
 
 void GmailWidget::adjustWindow(){    
@@ -66,20 +65,22 @@ void GmailWidget::adjustWindow(){
 
 void GmailWidget::moveWindow()
 {      
-    repeat++;
+    repeat++;   
+    //qDebug("repeat : %d",repeat); 
     if (repeat < 7)
     {
         moveUp();
     }
-    else if (repeat >= 7 && repeat < 20)
+    else if (repeat >= 8 && repeat < 9)
     {
-        ;
+        timer->stop();
+        timer2->start(5000);        
     }
-    else if (repeat >= 20 && repeat < 26)
+    else if (repeat >= 9 && repeat < 15)
     {
         moveDown();
     }
-    else if (repeat >= 26)
+    else if (repeat >= 15)
     {
         timer->stop();
     }
@@ -102,8 +103,39 @@ void GmailWidget::moveDown()
     //~ qDebug("Repeat D: %d - %d",y,height); 
 }
 
+void GmailWidget::showEmails()
+{    
+    if (emailIndex < emailsList.size())
+    {
+        //qDebug("emailIndex : %d",emailIndex);    
+        setMessage(emailIndex);   
+        emailIndex++;
+    }
+    else
+    {    
+        timer2->stop();
+        timer->start(90); 
+    }
+}
+
+void GmailWidget::setMessage(int index)
+{    
+    QString text = "<b>"+emailsList.at(index).name+"</b><br />";
+    text += "<b>"+emailsList.at(index).title+"</b><br />";
+    text += "<i>"+emailsList.at(index).summary+"</i><br />";
+    label->setText(text);  
+}
+
+void GmailWidget::setEmailsList(QList< emailStruct > list)
+{    
+    emailsList = list;
+}
+
 void GmailWidget::startTimer(int time)
 {
+    timer->stop();
     timer->start(time);
 }
+
+
 //

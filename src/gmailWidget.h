@@ -5,6 +5,7 @@
 #include <QString>
 #include <QRect>
 #include "ui_gmail.h"
+#include "gmail.h"
 //
 class GmailWidget : public QWidget, public Ui::Gmail
 {
@@ -13,10 +14,12 @@ public:
     GmailWidget( QWidget * parent = 0);
     void init(QString);   
     void showWidget();
+    void setEmailsList(QList< emailStruct >);
     
 private:
     void adjustWindow();    
     void startTimer(int);
+    void setMessage(int);
     QRect rec1;
     QRect rec2;
     qreal opac;
@@ -28,13 +31,17 @@ private:
     int screenWidth, width; 
     int screenHeight, height;
     int repeat;
+    int emailIndex;
     QTimer * timer;
+    QTimer * timer2;
+    QList< emailStruct > emailsList;
     
 public slots:
     void moveWindow();
-    void moveUp();
     
 private slots:
+    void showEmails();
+    void moveUp();
     void moveDown();
 };
 #endif
