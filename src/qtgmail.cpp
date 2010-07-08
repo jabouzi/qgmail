@@ -96,18 +96,20 @@ void QtGmail::showAboutQtWidget()
 
 void QtGmail::newEmails()
 {
-    trayIcon->setIcon(QIcon(path+"images/gmail1.png"));
+    trayIcon->setIcon(QIcon(path+"images/gmail1.png"));    
     displayNewEmails();    
 }
 
 void QtGmail::noNewEmails()
 {
     trayIcon->setIcon(QIcon(path+"images/gmail2.png"));
+    trayIcon->setToolTip("You don't have new emails");
 }
 
 void QtGmail::noConnection()
 {
     trayIcon->setIcon(QIcon(path+"images/gmail3.png"));
+    trayIcon->setToolTip("Connection error!");
 }
 
 void QtGmail::checkEmails()
@@ -121,7 +123,11 @@ void QtGmail::displayNewEmails()
     emailsList.clear();
     emailsList = gm->getNewEmails();    
     gmwt->setEmailsList(emailsList);
-    showWidget();    
+    showWidget();
+    if (emailsList.size() == 1)
+        trayIcon->setToolTip("You have "+QString::number(emailsList.size())+" new email");
+    else if (emailsList.size() > 1)
+        trayIcon->setToolTip("You have "+QString::number(emailsList.size())+" new emails");
 }
 
 void QtGmail::displayAllEmails()

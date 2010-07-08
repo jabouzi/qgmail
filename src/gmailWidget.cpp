@@ -56,8 +56,9 @@ void GmailWidget::showAboutApp()
 
 void GmailWidget::showAboutQt()
 {
-    var1 = 40; var2 = 41; var3 = 85;
+    var1 = 52; var2 = 53; var3 = 104;
     //setGeometry(500,y,500,height);
+    adjustWindow();
     setAboutQtMessage();    
     repeat = 0;
     show();
@@ -173,9 +174,9 @@ void GmailWidget::setAboutQtMessage()
 {    
     QImage image(path+"images/qt.png");
     label_3->setPixmap(QPixmap::fromImage(image));
-    label->setGeometry( 69, 5, 291, 600 );
-    QString text = "<p style=\"margin: 0px 0px; text-indent: 0px;\"><!--StartFragment--><span style=\"font-size: large; font-weight: 200;\">About Qt</span></p>";
-    text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">This program uses Qt version 4.6.2.</p>";
+    label->setGeometry( 69, 5, 291, 550 );
+    QString text = "<p style=\"margin: 0px 0px;\"><!--StartFragment--><span style=\"font-size: large; font-weight: 600;\">About Qt</span></p>";
+    text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">This program uses Qt version "+QString(QT_VERSION_STR)+".</p>";
     text +=  "<p style=\"margin: 5px 0px; text-indent: 0px;\"><!--StartFragment-->Qt is a C++ toolkit for cross-platform application development.</p>";
     text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">Qt provides single-source portability across MS&nbsp;Windows, Mac&nbsp;OS&nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.</p>";
     text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">Qt is available under three different licensing options designed to accommodate the needs of our various users.</p>";
@@ -184,7 +185,7 @@ void GmailWidget::setAboutQtMessage()
     text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.</p>";
     text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">Please see <a href=\"http://qt.nokia.com/products/licensing\"><span style=\"text-decoration: underline; color: rgb(0, 0, 255);\">qt.nokia.com/products/licensing</span></a> for an overview of Qt licensing.</p>";
     text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).</p>";
-    text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">Qt is a Nokia product. See <a href=\"http://qt.nokia.com/\"><span style=\"text-decoration: underline; color: rgb(0, 0, 255);\">qt.nokia.com</span></a> for more information.</p>";
+    text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">Qt is a Nokia product. See <a href=\"http://qt.nokia.com/\"><span style=\"text-decoration: underline; color: rgb(0, 0, 255);\">qt.nokia.com</span></a> for more information.<!--EndFragment--></p>";
     label->setText(text);  
 }
 
