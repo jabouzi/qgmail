@@ -33,6 +33,7 @@ private:
     QString path;
     QTimer * timer;
     QList< emailStruct > emailsList;
+    bool allEmails;
     
 private slots:
     void showWidget();
@@ -43,6 +44,8 @@ private slots:
     void displayNewEmails();
     void displayAllEmails();
     void viewInbox();
+    void showAboutWidget();
+    void showAboutQtWidget();
     
 };
 #endif

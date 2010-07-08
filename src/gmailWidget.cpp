@@ -3,7 +3,7 @@
 GmailWidget::GmailWidget( QWidget * parent) 
     : QWidget(parent)
 {
-    setupUi(this);
+    setupUi(this);    
     desktop = QApplication::desktop();
     opac = 0.9;    
     repeat = 0;    
@@ -13,74 +13,90 @@ GmailWidget::GmailWidget( QWidget * parent)
     connect(timer2, SIGNAL(timeout()), this, SLOT(showEmails()));
 }
 
-void GmailWidget::init(QString path)
+void GmailWidget::init(QString lpath)
 {    
-    this->setWindowOpacity(opac);
-    QImage image(path+"images/gmail4.png");
-    label_3->setPixmap(QPixmap::fromImage(image));
+    path = lpath;
+    this->setWindowOpacity(opac);    
     label->setTextFormat(Qt::RichText);
-    //adjustWindow();
+    label->setWordWrap(true);
 } 
 
 void GmailWidget::showWidget()
 {
-    setMessage(0);      
-    windowSize = size();      
-    width = windowSize.width(); 
-    height = windowSize.height(); 
-    QRect rec1 = desktop->screenGeometry (0);    
-    height = 0, x = rec1.width() - width, y = rec1.height() - 24;    
-    setGeometry(x,y,width,height);
+    var1 = 7; var2 = 8; var3 = 14;
+    adjustWindow();
+    setMessage(0);    
     repeat = 0;
     show();
     startTimer(90);
     emailIndex = 1;
 }
 
-void GmailWidget::adjustWindow(){    
-    QDesktopWidget *desktop = QApplication::desktop();
-    QRect rec1 = desktop->availableGeometry (0);
-    QRect rec2 = desktop->screenGeometry (0);         
-    screenWidth = desktop->width(); 
-    screenHeight = desktop->height();
-    qDebug("Screen  => W : %d, H : %d",screenWidth,screenHeight);  
+void GmailWidget::showNoEmailsWidget()
+{
+    var1 = 7; var2 = 8; var3 = 14;
+    adjustWindow();
+    setNoEmailsMessage();    
+    repeat = 0;
+    show();
+    startTimer(90);
+    emailIndex = 1;
+}
+
+void GmailWidget::showAboutApp()
+{
+    var1 = 10; var2 = 11; var3 = 20;
+    adjustWindow();
+    setAboutMessage();    
+    repeat = 0;
+    show();
+    startTimer(90);
+    emailIndex = 1;
+}
+
+void GmailWidget::showAboutQt()
+{
+    var1 = 40; var2 = 41; var3 = 80;
+    //adjustWindow();
+    width_ = 500;
+    x_ = rec1.width() - width_;
+    //rec1.width() - 500;
+    setGeometry(100,y,500,height);
+    setAboutQtMessage();    
+    repeat = 0;
+    show();
+    startTimer(90);
+    emailIndex = 1;
+}
+
+void GmailWidget::adjustWindow()
+{    
     windowSize = size();      
     width = windowSize.width(); 
     height = windowSize.height(); 
-    qDebug("Widget => W : %d, H : %d",width,height);   
-    qDebug("Rec1 => W : %d, H : %d",rec1.width() ,rec1.height() );  
-    qDebug("Rec2 => W : %d, H : %d",rec2.width() ,rec2.height() );  
-    x = (screenWidth - width);
-    y = (screenHeight - height);
-    qDebug("XY => W : %d, H : %d",x ,y );
-    int diff1 = rec2.height() - rec1.height();
-    int diff2 = rec2.width() - rec1.width();  
-    qDebug("diff => H : %d, W : %d",diff1 ,diff2 );  
-    qDebug("H : %d, W : %d",x+diff2 ,y+diff1);  
-    x = 918;
-    y = 710;
-    //move (x, y);
-    //setGeometry(x,y,0,0); 
+    QRect rec1 = desktop->screenGeometry (0);    
+    height = 0, x = rec1.width() - width, y = rec1.height() - 24;    
+    setGeometry(x,y,width,height);
 }
 
 void GmailWidget::moveWindow()
 {      
     repeat++;   
     //qDebug("repeat : %d",repeat); 
-    if (repeat < 7)
+    if (repeat < var1)
     {
         moveUp();
     }
-    else if (repeat >= 8 && repeat < 9)
+    else if (repeat >= var1 && repeat < var2)
     {
         timer->stop();
         timer2->start(5000);        
     }
-    else if (repeat >= 9 && repeat < 15)
+    else if (repeat >= var2 && repeat < var3)
     {
         moveDown();
     }
-    else if (repeat >= 15)
+    else if (repeat >= var3)
     {
         timer->stop();
     }
@@ -107,7 +123,7 @@ void GmailWidget::showEmails()
 {    
     if (emailIndex < emailsList.size())
     {
-        //qDebug("emailIndex : %d",emailIndex);    
+        qDebug("emailIndex : %d",emailIndex);    
         setMessage(emailIndex);   
         emailIndex++;
     }
@@ -120,6 +136,9 @@ void GmailWidget::showEmails()
 
 void GmailWidget::setMessage(int index)
 {        
+    QImage image(path+"images/gmail4.png");
+    label_3->setPixmap(QPixmap::fromImage(image));
+    label->setGeometry( 69, 5, 291, 57 );
     QString printedDate;
     getEmailDate(index);
     QDate date = QDate::currentDate();
@@ -131,6 +150,45 @@ void GmailWidget::setMessage(int index)
     QString text = "<b style='color:red;'>"+QString::fromUtf8(inboxSymbol.toLatin1().data())+"</b>"+QString::number(index+1)+" of "+QString::number(emailsList.size())+" - "+printedDate+" <b>"+emailsList.at(index).name+"</b><br />";
     text += "<b>"+emailsList.at(index).title+"</b><br />";
     text += "<i>"+emailsList.at(index).summary+"</i><br />";
+    label->setText(text);  
+}
+
+void GmailWidget::setNoEmailsMessage()
+{        
+    QImage image(path+"images/gmail4.png");
+    label_3->setPixmap(QPixmap::fromImage(image));
+    label->setGeometry( 69, 5, 291, 57 );
+    QString text = "Your inbox contains no unread conversations.";
+    label->setText(text);  
+}
+
+void GmailWidget::setAboutMessage()
+{    
+    QImage image(path+"images/qt-gmail.png");
+    label_3->setPixmap(QPixmap::fromImage(image));
+    label->setGeometry( 69, 5, 291, 90 );
+    QString cp = "©";
+    QString text = "<b> Qt-GmailNotifier Clone application 0.1</b> <br>Copyright " +  QString::fromUtf8(cp.toLatin1().data()) + " 2009 Skander Jabouzi skander@skanderjabouzi.com<br>";
+            text += " This is a free software distributed under the terms of the GNU <br> General Public License version 3<br>(http://www.gnu.org/licenses/gpl-3.0.html)";     
+    label->setText(text);  
+}
+
+void GmailWidget::setAboutQtMessage()
+{    
+    QImage image(path+"images/qt.png");
+    label_3->setPixmap(QPixmap::fromImage(image));
+    label->setGeometry( 69, 5, 400, 400 );
+    QString text = "<p style=\"margin: 0px 0px; 5px; text-indent: 0px;\"><!--StartFragment--><span style=\"font-size: large; font-weight: 600;\">About Qt</span></p>";
+    text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">This program uses Qt version 4.6.2.</p>";
+    text +=  "<p style=\"margin: 5px 0px; text-indent: 0px;\"><!--StartFragment-->Qt is a C++ toolkit for cross-platform application development.</p>";
+    text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">Qt provides single-source portability across MS&nbsp;Windows, Mac&nbsp;OS&nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.</p>";
+    text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">Qt is available under three different licensing options designed to accommodate the needs of our various users.</p>";
+    text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.</p>";
+    text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.</p>";
+    text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.</p>";
+    text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">Please see <a href=\"http://qt.nokia.com/products/licensing\"><span style=\"text-decoration: underline; color: rgb(0, 0, 255);\">qt.nokia.com/products/licensing</span></a> for an overview of Qt licensing.</p>";
+    text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).</p>";
+    text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">Qt is a Nokia product. See <a href=\"http://qt.nokia.com/\"><span style=\"text-decoration: underline; color: rgb(0, 0, 255);\">qt.nokia.com</span></a> for more information.</p>";
     label->setText(text);  
 }
 
@@ -148,7 +206,6 @@ void GmailWidget::startTimer(int time)
 void GmailWidget::getEmailDate(int index)
 {
     QDateTime dateTime0 = QDateTime::fromString(emailsList.at(index).issued, "yyyy-MM-ddTHH:mm:ssZ");
-    //~ int tz = getTimeZoneOffset();
     QDateTime dateTime =  QDateTime::fromTime_t(dateTime0.toTime_t()+getTimeZoneOffset().toInt()*3600);
     eDate.year = dateTime.date().year();
     eDate.month = dateTime.date().month();
@@ -172,6 +229,4 @@ QString GmailWidget::getTimeZoneOffset()
     
     return QString("%1").arg(offset);
 }
-
-
-//Your inbox contains no unread conversations.
+//

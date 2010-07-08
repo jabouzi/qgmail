@@ -37,10 +37,10 @@ void QtGmail::createActions()
     connect(tellmeagain_action, SIGNAL(triggered()), this, SLOT(displayAllEmails()));   
     
     about_action = new QAction(tr("About..."), this);
-    connect(about_action, SIGNAL(triggered()), this, SLOT(showWidget()));   
+    connect(about_action, SIGNAL(triggered()), this, SLOT(showAboutWidget()));   
     
     aboutqt_action = new QAction(tr("About QT..."), this);
-    connect(aboutqt_action, SIGNAL(triggered()), this, SLOT(showWidget()));   
+    connect(aboutqt_action, SIGNAL(triggered()), this, SLOT(showAboutQtWidget()));   
     
     quitAction = new QAction(tr("Exit"), this);
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));   
@@ -71,7 +71,27 @@ void QtGmail::showWidget()
 {    
     //~ gmwt->setWindowFlags(Qt::ToolTip);
     //~ gmwt->init(path);   
-    gmwt->showWidget();
+    if (emailsList.size() == 0)
+    {
+        if (allEmails)
+        {
+            gmwt->showNoEmailsWidget();
+        }
+    }
+    else
+    {
+        gmwt->showWidget();
+    }
+}
+
+void QtGmail::showAboutWidget()
+{
+    gmwt->showAboutApp();
+}
+
+void QtGmail::showAboutQtWidget()
+{
+    gmwt->showAboutQt();
 }
 
 void QtGmail::newEmails()
@@ -99,44 +119,20 @@ void QtGmail::checkEmails()
 
 void QtGmail::displayNewEmails()
 {
+    allEmails = false;
     emailsList.clear();
     emailsList = gm->getNewEmails();    
-    //~ qDebug(" You have %d new emails : ",emailsList.size());
-    if (emailsList.size() > 0)
-    {
-        gmwt->setEmailsList(emailsList);
-        //~ qDebug("\n");
-        //~ for (int i = 0; i < emailsList.size(); i++)
-        //~ {       
-            //~ qDebug("Email # %d : ",i+1);
-            //~ qDebug("title : %s",emailsList.at(i).title.toLatin1().data());
-            //~ qDebug("summary : %s",emailsList.at(i).summary.toLatin1().data());
-            //~ qDebug("name : %s",emailsList.at(i).name.toLatin1().data());
-            //~ qDebug("email : %s",emailsList.at(i).email.toLatin1().data());
-        //~ }    
-        showWidget();
-    }
+    gmwt->setEmailsList(emailsList);
+    showWidget();    
 }
 
 void QtGmail::displayAllEmails()
 {
+    allEmails = true;
     emailsList.clear();
-    emailsList = gm->getAllEmails();
-    if (emailsList.size() > 0)
-    {
-        gmwt->setEmailsList(emailsList);
-        //~ qDebug("\n");
-        //~ for (int i = 0; i < emailsList.size(); i++)
-        //~ {       
-            //~ qDebug("Email # %d : ",i+1);
-            //~ qDebug("title : %s",emailsList.at(i).title.toLatin1().data());
-            //~ qDebug("summary : %s",emailsList.at(i).summary.toLatin1().data());
-            //~ qDebug("name : %s",emailsList.at(i).name.toLatin1().data());
-            //~ qDebug("email : %s",emailsList.at(i).email.toLatin1().data());
-        //~ }    
-        showWidget();
-    }
-
+    emailsList = gm->getAllEmails();    
+    gmwt->setEmailsList(emailsList);    
+    showWidget();
 }
 
 void QtGmail::viewInbox()

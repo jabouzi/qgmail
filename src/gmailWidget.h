@@ -25,6 +25,9 @@ public:
     GmailWidget( QWidget * parent = 0);
     void init(QString);   
     void showWidget();
+    void showNoEmailsWidget();
+    void showAboutApp();
+    void showAboutQt();
     void setEmailsList(QList< emailStruct >);
     
 private:
@@ -33,6 +36,9 @@ private:
     void setMessage(int);
     void getEmailDate(int);
     QString getTimeZoneOffset();
+    void setNoEmailsMessage();
+    void setAboutMessage();
+    void setAboutQtMessage();
     QRect rec1;
     QRect rec2;
     qreal opac;
@@ -45,10 +51,12 @@ private:
     int screenHeight, height;
     int repeat;
     int emailIndex;
+    int var1, var2, var3;
     QTimer * timer;
     QTimer * timer2;
     QList< emailStruct > emailsList;
     emailDate eDate;
+    QString path;
     
 public slots:
     void moveWindow();
