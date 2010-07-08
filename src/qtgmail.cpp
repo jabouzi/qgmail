@@ -96,10 +96,8 @@ void QtGmail::showAboutQtWidget()
 
 void QtGmail::newEmails()
 {
-    //qDebug("New Emails");
     trayIcon->setIcon(QIcon(path+"images/gmail1.png"));
     displayNewEmails();    
-    //~ gmwt->setEmailsList(emailsList);
 }
 
 void QtGmail::noNewEmails()

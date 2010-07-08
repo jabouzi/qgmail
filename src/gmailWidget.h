@@ -47,8 +47,8 @@ private:
     QSize windowSize;     
     int x;
     int y;
-    int screenWidth, width; 
-    int screenHeight, height;
+    int screenWidth, width, originalWidth; 
+    int screenHeight, height, originalHeight;
     int repeat;
     int emailIndex;
     int var1, var2, var3;

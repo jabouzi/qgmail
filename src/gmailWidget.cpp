@@ -56,12 +56,8 @@ void GmailWidget::showAboutApp()
 
 void GmailWidget::showAboutQt()
 {
-    var1 = 40; var2 = 41; var3 = 80;
-    //adjustWindow();
-    width_ = 500;
-    x_ = rec1.width() - width_;
-    //rec1.width() - 500;
-    setGeometry(100,y,500,height);
+    var1 = 40; var2 = 41; var3 = 85;
+    //setGeometry(500,y,500,height);
     setAboutQtMessage();    
     repeat = 0;
     show();
@@ -177,8 +173,8 @@ void GmailWidget::setAboutQtMessage()
 {    
     QImage image(path+"images/qt.png");
     label_3->setPixmap(QPixmap::fromImage(image));
-    label->setGeometry( 69, 5, 400, 400 );
-    QString text = "<p style=\"margin: 0px 0px; 5px; text-indent: 0px;\"><!--StartFragment--><span style=\"font-size: large; font-weight: 600;\">About Qt</span></p>";
+    label->setGeometry( 69, 5, 291, 600 );
+    QString text = "<p style=\"margin: 0px 0px; text-indent: 0px;\"><!--StartFragment--><span style=\"font-size: large; font-weight: 200;\">About Qt</span></p>";
     text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">This program uses Qt version 4.6.2.</p>";
     text +=  "<p style=\"margin: 5px 0px; text-indent: 0px;\"><!--StartFragment-->Qt is a C++ toolkit for cross-platform application development.</p>";
     text += "<p style=\"margin: 5px 0px; text-indent: 0px;\">Qt provides single-source portability across MS&nbsp;Windows, Mac&nbsp;OS&nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.</p>";
