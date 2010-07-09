@@ -124,10 +124,10 @@ void QtGmail::displayNewEmails()
     emailsList = gm->getNewEmails();    
     gmwt->setEmailsList(emailsList);
     showWidget();
-    if (emailsList.size() == 1)
-        trayIcon->setToolTip("You have "+QString::number(emailsList.size())+" new email");
+    if (gm->getAllEmails().size() == 1)
+        trayIcon->setToolTip("You have "+QString::number(gm->getAllEmails().size())+" new email");
     else if (emailsList.size() > 1)
-        trayIcon->setToolTip("You have "+QString::number(emailsList.size())+" new emails");
+        trayIcon->setToolTip("You have "+QString::number(gm->getAllEmails().size())+" new emails");
 }
 
 void QtGmail::displayAllEmails()
