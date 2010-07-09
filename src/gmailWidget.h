@@ -6,6 +6,7 @@
 #include <QRect>
 #include "ui_gmail.h"
 #include "gmail.h"
+#include "log.h"
 //
 
 struct emailDate {
@@ -58,6 +59,7 @@ private:
     QList< emailStruct > emailsList;
     emailDate eDate;
     QString path;
+    Log *pLog;
     
 public slots:
     void moveWindow();

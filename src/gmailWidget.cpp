@@ -3,6 +3,7 @@
 GmailWidget::GmailWidget( QWidget * parent) 
     : QWidget(parent)
 {
+    pLog = new Log("gmail.log");
     setupUi(this);    
     desktop = QApplication::desktop();
     opac = 0.9;    
@@ -74,6 +75,10 @@ void GmailWidget::adjustWindow()
     QRect rec1 = desktop->screenGeometry (0);    
     height = 0, x = rec1.width() - width, y = rec1.height() - getTopPanel();    
     setGeometry(x,y,width,height);
+    pLog->Write(QString::number(width)); 
+    pLog->Write(QString::number(height)); 
+    pLog->Write(QString::number(rec1.width())); 
+    pLog->Write(QString::number(rec1.height())); 
 }
 
 void GmailWidget::moveWindow()
