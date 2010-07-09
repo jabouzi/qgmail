@@ -58,7 +58,6 @@ void GmailWidget::showAboutApp()
 void GmailWidget::showAboutQt()
 {
     var1 = 52; var2 = 53; var3 = 104;
-    //setGeometry(500,y,500,height);
     adjustWindow();
     setAboutQtMessage();    
     repeat = 0;
@@ -87,7 +86,6 @@ void GmailWidget::adjustWindow()
 void GmailWidget::moveWindow()
 {      
     repeat++;   
-    //qDebug("repeat : %d",repeat); 
     if (repeat < var1)
     {
         moveUp();
@@ -121,7 +119,6 @@ void GmailWidget::moveDown()
     height = height - 11;
     setGeometry(x,y,width,height);
     startTimer(90);
-    //~ qDebug("Repeat D: %d - %d",y,height); 
 }
 
 void GmailWidget::showEmails()
