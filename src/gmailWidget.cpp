@@ -73,12 +73,15 @@ void GmailWidget::adjustWindow()
     width = windowSize.width(); 
     height = windowSize.height(); 
     QRect rec1 = desktop->screenGeometry (0);    
+    QRect rec2 = desktop->availableGeometry (0);    
     height = 0, x = rec1.width() - width, y = rec1.height() - getTopPanel();    
     setGeometry(x,y,width,height);
     pLog->Write("W : "+QString::number(width)); 
     pLog->Write("H : "+QString::number(height)); 
     pLog->Write("RW : "+QString::number(rec1.width())); 
     pLog->Write("RH : "+QString::number(rec1.height())); 
+    pLog->Write("RW : "+QString::number(rec2.width())); 
+    pLog->Write("RH : "+QString::number(rec2.height())); 
 }
 
 void GmailWidget::moveWindow()
