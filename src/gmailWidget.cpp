@@ -78,10 +78,10 @@ void GmailWidget::adjustWindow()
     setGeometry(x,y,width,height);
     pLog->Write("W : "+QString::number(width)); 
     pLog->Write("H : "+QString::number(height)); 
-    pLog->Write("RW : "+QString::number(rec1.width())); 
-    pLog->Write("RH : "+QString::number(rec1.height())); 
-    pLog->Write("RW : "+QString::number(rec2.width())); 
-    pLog->Write("RH : "+QString::number(rec2.height())); 
+    pLog->Write("RW1 : "+QString::number(rec1.width())); 
+    pLog->Write("RH1 : "+QString::number(rec1.height())); 
+    pLog->Write("RW2 : "+QString::number(rec2.width())); 
+    pLog->Write("RH2 : "+QString::number(rec2.height())); 
 }
 
 void GmailWidget::moveWindow()
