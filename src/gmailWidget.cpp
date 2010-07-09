@@ -72,7 +72,7 @@ void GmailWidget::adjustWindow()
     width = windowSize.width(); 
     height = windowSize.height(); 
     QRect rec1 = desktop->screenGeometry (0);    
-    height = 0, x = rec1.width() - width, y = rec1.height() - 24;    
+    height = 0, x = rec1.width() - width, y = rec1.height() - getTopPanel();    
     setGeometry(x,y,width,height);
 }
 
@@ -198,6 +198,35 @@ void GmailWidget::startTimer(int time)
 {
     timer->stop();
     timer->start(time);
+}
+
+int GmailWidget::getTopPanel()
+{
+    int topPanel = 0;
+    #ifdef Q_WS_X11
+    char * pPath = getenv ("KDE_FULL_SESSION");
+    if (QString(pPath) == NULL)
+    {
+        QProcess gconf;
+        gconf.start("gconftool", QStringList() << "--get" <<  "/schemas/apps/panel/toplevels/size");   
+        
+        gconf.waitForStarted();         
+        gconf.closeWriteChannel();
+        gconf.waitForFinished();
+
+        QByteArray result = gconf.readAll();
+        
+        QString str = QString(result);
+        int j = 0;
+        j = str.indexOf("Default Value:", j);
+        
+        int k = 0;
+        k = str.indexOf("Owner:", k);         
+        
+        topPanel = str.section("", j, k).trimmed().section("",-3,-1).toInt();
+    }
+    #endif
+    return topPanel;
 }
 
 void GmailWidget::getEmailDate(int index)

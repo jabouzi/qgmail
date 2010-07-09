@@ -39,6 +39,7 @@ private:
     void setNoEmailsMessage();
     void setAboutMessage();
     void setAboutQtMessage();
+    int getTopPanel();
     QRect rec1;
     QRect rec2;
     qreal opac;
