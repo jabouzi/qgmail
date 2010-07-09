@@ -1,5 +1,5 @@
 TEMPLATE = app
-QT = gui core sql network xml
+QT = gui core network xml
 CONFIG += qt warn_on release
 OBJECTS_DIR = build
 MOC_DIR = build
