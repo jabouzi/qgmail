@@ -4,7 +4,6 @@
 #include <QHttp>
 #include <QtNetwork>
 #include <QXmlStreamReader>
-#include <QtSql>
 #include "login.h"
 
 struct emailStruct {

@@ -2,8 +2,7 @@
 //
 GmailWidget::GmailWidget( QWidget * parent) 
     : QWidget(parent)
-{
-    pLog = new Log("gmail.log");
+{    
     setupUi(this);    
     desktop = QApplication::desktop();
     opac = 0.9;    
@@ -17,6 +16,7 @@ GmailWidget::GmailWidget( QWidget * parent)
 void GmailWidget::init(QString lpath)
 {    
     path = lpath;
+    pLog = new Log(path+"gmail.log");
     this->setWindowOpacity(opac);    
     label->setTextFormat(Qt::RichText);
     label->setWordWrap(true);
