@@ -103,7 +103,7 @@ void QtGmail::newEmails()
 void QtGmail::noNewEmails()
 {
     trayIcon->setIcon(QIcon(path+"images/gmail2.png"));
-    trayIcon->setToolTip("You don't have new emails");
+    trayIcon->setToolTip("Qt-GmailNotifier, You don't have new emails");
 }
 
 void QtGmail::noConnection()
@@ -125,9 +125,9 @@ void QtGmail::displayNewEmails()
     gmwt->setEmailsList(emailsList);
     showWidget();
     if (gm->getAllEmails().size() == 1)
-        trayIcon->setToolTip("You have "+QString::number(gm->getAllEmails().size())+" new email");
-    else if (emailsList.size() > 1)
-        trayIcon->setToolTip("You have "+QString::number(gm->getAllEmails().size())+" new emails");
+        trayIcon->setToolTip("Qt-GmailNotifier, You have "+QString::number(gm->getAllEmails().size())+" new email");
+    else if (gm->getAllEmails().size() > 1)
+        trayIcon->setToolTip("Qt-GmailNotifier, You have "+QString::number(gm->getAllEmails().size())+" new emails");
 }
 
 void QtGmail::displayAllEmails()
