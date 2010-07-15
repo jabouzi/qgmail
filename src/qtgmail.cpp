@@ -1,5 +1,5 @@
 #include <QtGui>
-
+ #include <QSound>
 #include "qtgmail.h"
 //
 QtGmail::QtGmail()    
@@ -22,7 +22,7 @@ void QtGmail::init()
     gmwt->init(path);   
     gm->init();
     gm->initLogin(path);
-    timer->start(600000);
+    timer->start(300000);
 }
 
 void QtGmail::createActions()
@@ -80,6 +80,7 @@ void QtGmail::showWidget()
     }
     else
     {
+        QSound::play("/usr/share/sounds/purple/receive.wav");
         gmwt->showWidget();
     }
 }
@@ -149,7 +150,7 @@ void QtGmail::viewInbox()
 void QtGmail::startTimer()
 {
     timer->stop();    
-    timer->start(600000);
+    timer->start(300000);
 }
 
 
