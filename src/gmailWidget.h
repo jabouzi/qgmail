@@ -30,6 +30,7 @@ public:
     void showAboutApp();
     void showAboutQt();
     void setEmailsList(QList< emailStruct >);
+    void setEmailsCount(int);
     
 private:
     void adjustWindow();    
@@ -46,7 +47,8 @@ private:
     qreal opac;
     QRegion region;    
     QDesktopWidget *desktop;
-    QSize windowSize;     
+    QSize windowSize;  
+    int emailsCount;   
     int x;
     int y;
     int screenWidth, width, originalWidth; 

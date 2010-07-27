@@ -33,6 +33,7 @@ private:
     QString path;
     QTimer * timer;
     QList< emailStruct > emailsList;
+    int emailsCount;
     bool allEmails;
     
 private slots:

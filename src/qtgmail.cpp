@@ -120,20 +120,23 @@ void QtGmail::displayNewEmails()
 {
     allEmails = false;
     emailsList.clear();
-    emailsList = gm->getNewEmails();    
+    emailsList = gm->getNewEmails();  
+    emailsCount = gm->getEmailsCount();  
+    gmwt->setEmailsCount(emailsCount);
     gmwt->setEmailsList(emailsList);
     showWidget();
-    if (gm->getAllEmails().size() == 1)
-        trayIcon->setToolTip("Qt-GmailNotifier\nYou have "+QString::number(gm->getAllEmails().size())+" new email");
-    else if (gm->getAllEmails().size() > 1)
-        trayIcon->setToolTip("Qt-GmailNotifier\nYou have "+QString::number(gm->getAllEmails().size())+" new emails");
+    QString many = "";
+    if (emailsCount > 1) many = 's';    
+    trayIcon->setToolTip("Qt-GmailNotifier\nYou have "+QString::number(emailsCount)+" new email"+many);
 }
 
 void QtGmail::displayAllEmails()
 {
     allEmails = true;
     emailsList.clear();
-    emailsList = gm->getAllEmails();    
+    emailsList = gm->getAllEmails(); 
+    emailsCount = gm->getEmailsCount();  
+    gmwt->setEmailsCount(emailsCount);   
     gmwt->setEmailsList(emailsList);    
     showWidget();
 }

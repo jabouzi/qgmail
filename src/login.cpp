@@ -71,7 +71,7 @@ void Login::writeData()
     readData();
     if (username != usernameEdit->text() && password != passwordEdit->text())
     {
-        QFile file("gmail.dat");
+        QFile file(path+"gmail.dat");
         file.open(QIODevice::WriteOnly);
         QDataStream out(&file);   
         out << QString(usernameEdit->text());   
@@ -81,7 +81,7 @@ void Login::writeData()
 
 void Login::readData()
 {
-    QFile file("gmail.dat");
+    QFile file(path+"gmail.dat");
     file.open(QIODevice::ReadOnly);
     QDataStream in(&file);   
     in >> username >> password;     
@@ -89,7 +89,7 @@ void Login::readData()
 
 void Login::removeData()
 {   
-    QFile file("gmail.dat");
+    QFile file(path+"gmail.dat");
     file.open(QIODevice::WriteOnly);
     QDataStream out(&file);   
     out << QString("");   

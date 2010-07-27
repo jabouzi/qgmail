@@ -122,6 +122,11 @@ void Gmail::getEmails()
     }    
 }
 
+int Gmail::getEmailsCount()
+{
+    return emailsCount;
+}
+
 QList< emailStruct > Gmail::getNewEmails()
 {   
     return emailsList;

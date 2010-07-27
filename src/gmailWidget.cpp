@@ -46,6 +46,7 @@ void GmailWidget::showNoEmailsWidget()
 
 void GmailWidget::showAboutApp()
 {
+    emailsList.clear();
     var1 = 10; var2 = 11; var3 = 20;
     adjustWindow();
     setAboutMessage();    
@@ -57,6 +58,7 @@ void GmailWidget::showAboutApp()
 
 void GmailWidget::showAboutQt()
 {
+    emailsList.clear();
     var1 = 52; var2 = 53; var3 = 104;
     adjustWindow();
     setAboutQtMessage();    
@@ -154,7 +156,7 @@ void GmailWidget::setMessage(int index)
     else
         printedDate = QString::number(eDate.hour)+":"+QString::number(eDate.minute);
     QString inboxSymbol = "»";
-    QString text = "<b style='color:red;'>"+QString::fromUtf8(inboxSymbol.toLatin1().data())+"</b>"+QString::number(index+1)+" of "+QString::number(emailsList.size())+" - "+printedDate+" <b>"+emailsList.at(index).name+"</b><br />";
+    QString text = "<b style='color:red;'>"+QString::fromUtf8(inboxSymbol.toLatin1().data())+"</b>"+QString::number(index+1)+" of "+QString::number(emailsCount)+" - "+printedDate+" <b>"+emailsList.at(index).name+"</b><br />";
     text += "<b>"+emailsList.at(index).title+"</b><br />";
     text += "<i>"+emailsList.at(index).summary+"</i><br />";
     label->setText(text);  
@@ -237,6 +239,11 @@ int GmailWidget::getTopPanel()
     }
     #endif
     return topPanel;
+}
+
+void GmailWidget::setEmailsCount(int count)
+{
+    emailsCount = count;
 }
 
 void GmailWidget::getEmailDate(int index)
