@@ -123,7 +123,13 @@ void GmailWidget::moveDown()
 
 void GmailWidget::showEmails()
 {    
-    if (emailIndex < emailsList.size())
+    int maxEmails = 20;
+    if (emailsList.size() < maxEmails) 
+    {
+        maxEmails = emailsList.size();
+    }
+    
+    if (emailIndex < maxEmails)
     {
         setMessage(emailIndex);   
         emailIndex++;

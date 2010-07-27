@@ -22,7 +22,7 @@ void QtGmail::init()
     gmwt->init(path);   
     gm->init();
     gm->initLogin(path);
-    timer->start(300000);
+    timer->start(60000);
 }
 
 void QtGmail::createActions()
@@ -69,8 +69,6 @@ void QtGmail::createTrayIcon()
 
 void QtGmail::showWidget()
 {    
-    //~ gmwt->setWindowFlags(Qt::ToolTip);
-    //~ gmwt->init(path);   
     if (emailsList.size() == 0)
     {
         if (allEmails)
@@ -150,7 +148,7 @@ void QtGmail::viewInbox()
 void QtGmail::startTimer()
 {
     timer->stop();    
-    timer->start(300000);
+    timer->start(60000);
 }
 
 
