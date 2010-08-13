@@ -134,6 +134,13 @@ image: url(:/images/lock.png);</string>
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>usernameEdit</tabstop>
+  <tabstop>passwordEdit</tabstop>
+  <tabstop>showPasswordCheck</tabstop>
+  <tabstop>savePasswordCheck</tabstop>
+  <tabstop>loginButton</tabstop>
+ </tabstops>
  <resources>
   <include location="../gmail.qrc"/>
  </resources>
