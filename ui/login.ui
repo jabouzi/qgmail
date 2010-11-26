@@ -72,7 +72,7 @@ image: url(:/images/lock.png);</string>
    <property name="geometry">
     <rect>
      <x>160</x>
-     <y>250</y>
+     <y>240</y>
      <width>81</width>
      <height>27</height>
     </rect>
@@ -107,24 +107,11 @@ image: url(:/images/lock.png);</string>
     <string>Password :</string>
    </property>
   </widget>
-  <widget class="QCheckBox" name="showPasswordCheck">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>190</y>
-     <width>131</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Show password</string>
-   </property>
-  </widget>
   <widget class="QCheckBox" name="savePasswordCheck">
    <property name="geometry">
     <rect>
      <x>160</x>
-     <y>220</y>
+     <y>200</y>
      <width>131</width>
      <height>22</height>
     </rect>
@@ -137,7 +124,6 @@ image: url(:/images/lock.png);</string>
  <tabstops>
   <tabstop>usernameEdit</tabstop>
   <tabstop>passwordEdit</tabstop>
-  <tabstop>showPasswordCheck</tabstop>
   <tabstop>savePasswordCheck</tabstop>
   <tabstop>loginButton</tabstop>
  </tabstops>

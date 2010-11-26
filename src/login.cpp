@@ -39,17 +39,7 @@ void Login::closeEvent(QCloseEvent *event)
 //
 void Login::setActions()
 {
-    connect(showPasswordCheck, SIGNAL(clicked()), this, SLOT(showPassword()));
     connect(loginButton, SIGNAL(clicked()), this, SLOT(doLogin()));    
-}
-
-void Login::showPassword()
-{
-    passwordEdit->setEchoMode(QLineEdit::Password);
-    if (showPasswordCheck->isChecked() == true)
-    {
-        passwordEdit->setEchoMode(QLineEdit::Normal);
-    }
 }
 
 void Login::doLogin()

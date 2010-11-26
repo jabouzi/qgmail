@@ -28,7 +28,6 @@ private:
     QString path;
     
 private slots:
-    void showPassword();
     void doLogin();       
     
 signals:
