@@ -145,7 +145,7 @@ void GmailWidget::showEmails()
 
 void GmailWidget::setMessage(int index)
 {        
-    QImage image(path+"images/gmail4.png");
+    QImage image(":/images/gmail4.png");
     label_3->setPixmap(QPixmap::fromImage(image));
     label->setGeometry( 69, 5, 291, 57 );
     QString printedDate;
@@ -164,7 +164,7 @@ void GmailWidget::setMessage(int index)
 
 void GmailWidget::setNoEmailsMessage()
 {        
-    QImage image(path+"images/gmail4.png");
+    QImage image(":/images/gmail4.png");
     label_3->setPixmap(QPixmap::fromImage(image));
     label->setGeometry( 69, 5, 291, 57 );
     QString text = "Your inbox contains no unread conversations.";
@@ -173,7 +173,7 @@ void GmailWidget::setNoEmailsMessage()
 
 void GmailWidget::setAboutMessage()
 {    
-    QImage image(path+"images/qt-gmail.png");
+    QImage image(":/images/qt-gmail.png");
     label_3->setPixmap(QPixmap::fromImage(image));
     label->setGeometry( 69, 5, 291, 90 );
     QString cp = "©";
@@ -184,7 +184,7 @@ void GmailWidget::setAboutMessage()
 
 void GmailWidget::setAboutQtMessage()
 {    
-    QImage image(path+"images/qt.png");
+    QImage image(":/images/qt.png");
     label_3->setPixmap(QPixmap::fromImage(image));
     label->setGeometry( 69, 5, 291, 550 );
     QString text = "<p style=\"margin: 0px 0px;\"><!--StartFragment--><span style=\"font-size: large; font-weight: 600;\">About Qt</span></p>";

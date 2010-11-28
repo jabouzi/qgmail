@@ -55,7 +55,7 @@ void QtGmail::createActions()
 void QtGmail::createTrayIcon()
 {      
     /*tooltip avec le nombre d'emails*/
-    trayIcon->setIcon(QIcon(path+"images/gmail2.png"));
+    trayIcon->setIcon(QIcon(":/images/gmail2.png"));
     trayIcon->show();    
     trayIcon->setContextMenu(trayIconMenu);    
     trayIconMenu->addAction(viewinbox_action); 
@@ -95,19 +95,19 @@ void QtGmail::showAboutQtWidget()
 
 void QtGmail::newEmails()
 {
-    trayIcon->setIcon(QIcon(path+"images/gmail1.png"));    
+    trayIcon->setIcon(QIcon(":/images/gmail1.png"));    
     displayNewEmails();    
 }
 
 void QtGmail::noNewEmails()
 {
-    trayIcon->setIcon(QIcon(path+"images/gmail2.png"));
+    trayIcon->setIcon(QIcon(":/images/gmail2.png"));
     trayIcon->setToolTip("Qt-GmailNotifier\nYou don't have new emails");
 }
 
 void QtGmail::noConnection()
 {
-    trayIcon->setIcon(QIcon(path+"images/gmail3.png"));
+    trayIcon->setIcon(QIcon(":/images/gmail3.png"));
     trayIcon->setToolTip("Connection error!");
 }
 
