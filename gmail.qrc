@@ -8,6 +8,6 @@
 <file>images/qt-gmail.png</file>
 <file>images/qt.png</file>
 <file>images/lock.png</file>
-<file>images/settings.png</file>
+<file>audio/notify.mp3</file>
 </qresource>
 </RCC> 

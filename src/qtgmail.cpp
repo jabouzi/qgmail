@@ -1,5 +1,5 @@
 #include <QtGui>
- #include <QSound>
+#include <phonon>
 #include "qtgmail.h"
 //
 QtGmail::QtGmail()    
@@ -12,7 +12,8 @@ QtGmail::QtGmail()
     gm = new Gmail();
     timer = new QTimer(this);
     createActions();
-    createTrayIcon();   
+    createTrayIcon();       
+    music = createPlayer(Phonon::MusicCategory);
     init();     
 }
 
@@ -78,7 +79,9 @@ void QtGmail::showWidget()
     }
     else
     {
-        QSound::play("/usr/share/sounds/purple/receive.wav");
+        QString fileName(path+"audio/notify.wav");
+        music->setCurrentSource(fileName);
+        music->play();    
         gmwt->showWidget();
     }
 }
@@ -153,6 +156,3 @@ void QtGmail::startTimer()
     timer->stop();    
     timer->start(60000);
 }
-
-
-

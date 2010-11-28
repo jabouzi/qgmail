@@ -5,6 +5,7 @@
 #include <QSystemTrayIcon>
 #include <QMenu>
 #include <QString>
+#include <phonon>
 #include "gmailWidget.h"
 
 //
@@ -35,6 +36,10 @@ private:
     QList< emailStruct > emailsList;
     int emailsCount;
     bool allEmails;
+    Phonon::MediaObject *music;
+    //Phonon::MediaObject *mediaObject;
+    //Phonon::MediaObject *metaInformationResolver;
+    //Phonon::AudioOutput *audioOutput;
     
 private slots:
     void showWidget();

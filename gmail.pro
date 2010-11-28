@@ -1,5 +1,5 @@
 TEMPLATE = app
-QT = gui core network xml
+QT = gui core network xml phonon
 CONFIG += qt warn_on release
 OBJECTS_DIR = build
 MOC_DIR = build
