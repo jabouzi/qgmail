@@ -37,9 +37,6 @@ private:
     int emailsCount;
     bool allEmails;
     Phonon::MediaObject *music;
-    //Phonon::MediaObject *mediaObject;
-    //Phonon::MediaObject *metaInformationResolver;
-    //Phonon::AudioOutput *audioOutput;
     
 private slots:
     void showWidget();
