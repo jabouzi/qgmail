@@ -78,10 +78,7 @@ void QtGmail::showWidget()
         }
     }
     else
-    {
-        QString fileName(path+"audio/notify.wav");
-        music->setCurrentSource(fileName);
-        music->play();    
+    {         
         gmwt->showWidget();
     }
 }
@@ -97,7 +94,7 @@ void QtGmail::showAboutQtWidget()
 }
 
 void QtGmail::newEmails()
-{
+{      
     trayIcon->setIcon(QIcon(":/images/gmail1.png"));    
     displayNewEmails();    
 }
@@ -120,7 +117,7 @@ void QtGmail::checkEmails()
 }
 
 void QtGmail::displayNewEmails()
-{
+{    
     allEmails = false;
     emailsList.clear();
     emailsList = gm->getNewEmails();  
@@ -129,6 +126,12 @@ void QtGmail::displayNewEmails()
     gmwt->setEmailsList(emailsList);
     showWidget();
     QString many = "";
+    //~ if (emailsCount > 0) 
+    //~ {
+        //~ QString fileName(path+"audio/notify.wav");
+        //~ music->setCurrentSource(fileName);
+        //~ music->play(); 
+    //~ }
     if (emailsCount > 1) many = 's';    
     trayIcon->setToolTip("Qt-GmailNotifier\nYou have "+QString::number(emailsCount)+" new email"+many);
 }
