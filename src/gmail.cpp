@@ -79,11 +79,13 @@ void Gmail::getEmails()
                 {
                     currentCount = emailsCount;     
                     new_emails = true;   
+                    qDebug() << "New emails";
                     emit(newEmails());                                
                 }         
                 else
                 {
                     new_emails = false;
+                    qDebug() << "No new emails";
                     emit(noNewEmails());    
                 }      
             }

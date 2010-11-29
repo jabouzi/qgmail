@@ -132,7 +132,7 @@ void QtGmail::displayNewEmails()
         //~ music->setCurrentSource(fileName);
         //~ music->play(); 
     //~ }
-    if (emailsCount > 1) many = 's';    
+    if (emailsCount > 1) many = "s";    
     trayIcon->setToolTip("Qt-GmailNotifier\nYou have "+QString::number(emailsCount)+" new email"+many);
 }
 
