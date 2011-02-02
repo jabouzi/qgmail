@@ -6,6 +6,7 @@ QtGmail::QtGmail()
 {
     path = QCoreApplication::applicationDirPath();
     if (path.data()[path.size() - 1] != '/') path += "/";
+    qDebug() << path;
     trayIcon = new QSystemTrayIcon(this); 
     trayIconMenu = new QMenu(this);         
     gmwt = new GmailWidget();    

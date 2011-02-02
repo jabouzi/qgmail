@@ -48,6 +48,7 @@ class Gmail : public QObject
         
     private slots:        
         void readData(const QHttpResponseHeader &);    
+        void rFinished(int id, bool error);
         void doConnection();
         
     signals:   

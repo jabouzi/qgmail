@@ -4,6 +4,7 @@ Gmail::Gmail(QObject* parent) :
     QObject(parent)
 {              
     connect(&http, SIGNAL(readyRead(QHttpResponseHeader)),this, SLOT(readData(QHttpResponseHeader))); 
+    connect(&http, SIGNAL(requestFinished(int,bool)), this, SLOT(rFinished(int,bool)));
     connect(&login, SIGNAL(loginClicked()),this, SLOT(doConnection())); 
 }
 
@@ -26,23 +27,39 @@ void Gmail::initLogin(QString path)
 void Gmail::connection()
 {    
     init();    
-    http.setHost("mail.google.com", QHttp::ConnectionModeHttps);
+    qDebug() << 1234 ;
+    http.setHost("mail.googlez.com", QHttp::ConnectionModeHttps);
     http.setUser(username, password);
     http.get("/mail/feed/atom");    
 }
 
 void Gmail::readData(const QHttpResponseHeader &resp)
-{
+{   
+    qDebug() << "****" << resp.toString (); 
+    qDebug() << "****" << resp.statusCode (); 
     if (resp.statusCode() != 200)
-    {
+    {        
+        qDebug() << 5678 << resp.statusCode();
         http.abort();
         emit(noConnection());
     }
-    else {
+    else if (resp.statusCode() == 200){
+        qDebug() << 5678 << resp.statusCode();
         xml.addData(http.readAll());        
         getEmails();
     }
 }
+
+void Gmail::rFinished(int id, bool error)
+ {
+     if (error) {
+         qDebug() << id << error;
+         if (id == QHttp::ConnectionRefused) qWarning("Connection Refused");
+     }
+     else if (id == connectionId) {
+         qDebug() << id;         
+     }
+ }
 
 void Gmail::getEmails()
 {    
@@ -119,6 +136,7 @@ void Gmail::getEmails()
         }
     }
     if (xml.error() && xml.error() != QXmlStreamReader::PrematureEndOfDocumentError) {
+        qDebug() << 7890;
         qWarning() << "XML ERROR:" << xml.lineNumber() << ": " << xml.errorString();
         http.abort();
     }    
