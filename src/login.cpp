@@ -11,7 +11,7 @@ void Login::setPath(QString lpath)
     path = lpath;        
 }
 
-void  Login::showWindow()
+void Login::showWindow()
 {
     show();
     readData(); 
@@ -58,15 +58,13 @@ void Login::doLogin()
 
 void Login::writeData()
 {
-    readData();
-    if (username != usernameEdit->text() && password != passwordEdit->text())
-    {
-        QFile file(path+"gmail.dat");
-        file.open(QIODevice::WriteOnly);
-        QDataStream out(&file);   
-        out << QString(usernameEdit->text());   
-        out << QString(passwordEdit->text());   
-    }
+        
+    QFile file(path+"gmail.dat");
+    file.open(QIODevice::WriteOnly);
+    QDataStream out(&file);   
+    out << QString(usernameEdit->text());   
+    out << QString(passwordEdit->text());   
+
 }
 
 void Login::readData()

@@ -28,7 +28,7 @@ void Gmail::connection()
 {    
     init();    
     qDebug() << 1234 ;
-    http.setHost("mail.googlez.com", QHttp::ConnectionModeHttps);
+    http.setHost("mail.google.com", QHttp::ConnectionModeHttps);
     http.setUser(username, password);
     http.get("/mail/feed/atom");    
 }
