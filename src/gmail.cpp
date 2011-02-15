@@ -53,7 +53,7 @@ void Gmail::readData(const QHttpResponseHeader &resp)
 void Gmail::rFinished(int id, bool error)
  {
      if (error) {
-         qDebug() << id << error;
+         qDebug() << id << error << http.errorString () << http.error ();
          if (id == QHttp::ConnectionRefused) qWarning("Connection Refused");
      }
      else if (id == connectionId) {
