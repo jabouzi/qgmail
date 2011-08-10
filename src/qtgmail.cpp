@@ -20,12 +20,13 @@ QtGmail::QtGmail()
 
 bool QtGmail::myEventFilter(void *message, long *result)
 {
-    
+    qDebug() << message;
+    return false;
 }
 
 void QtGmail::init()
 {
-    qApp->setEventFilter(QtGmail::myEventFilter);
+    qApp->setEventFilter(&QtGmail::myEventFilter);
     gmwt->setWindowFlags(Qt::ToolTip);
     gmwt->init(path);   
     gm->init();

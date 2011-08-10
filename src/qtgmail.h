@@ -20,7 +20,7 @@ private:
     void createActions();
     void createTrayIcon();
     void startTimer();
-    bool myEventFilter(void *message, long *result);
+    static bool myEventFilter(void *message, long *result);
 
     //QCoreApplication::EventFilter myEventFilter
     QSystemTrayIcon *trayIcon;
