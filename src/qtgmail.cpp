@@ -18,8 +18,14 @@ QtGmail::QtGmail()
     init();     
 }
 
+bool QtGmail::myEventFilter(void *message, long *result)
+{
+    
+}
+
 void QtGmail::init()
 {
+    qApp->setEventFilter(QtGmail::myEventFilter);
     gmwt->setWindowFlags(Qt::ToolTip);
     gmwt->init(path);   
     gm->init();

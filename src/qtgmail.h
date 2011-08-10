@@ -20,7 +20,9 @@ private:
     void createActions();
     void createTrayIcon();
     void startTimer();
-    
+    bool myEventFilter(void *message, long *result);
+
+    //QCoreApplication::EventFilter myEventFilter
     QSystemTrayIcon *trayIcon;
     QMenu *trayIconMenu;
     GmailWidget * gmwt;
@@ -48,7 +50,7 @@ private slots:
     void displayAllEmails();
     void viewInbox();
     void showAboutWidget();
-    void showAboutQtWidget();
+    void showAboutQtWidget();   
     
 };
 #endif
