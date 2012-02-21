@@ -2,6 +2,9 @@
 #include <phonon>
 #include "qtgmail.h"
 //
+
+//qxtApp->installNativeEventFilter(QtGmail);
+
 QtGmail::QtGmail()    
 {
     path = QCoreApplication::applicationDirPath();
@@ -15,19 +18,55 @@ QtGmail::QtGmail()
     createActions();
     createTrayIcon();       
     music = createPlayer(Phonon::MusicCategory);
+    pLog = new Log(path+"gmail.log");
     init();     
 }
 
 bool QtGmail::myEventFilter(void *message, long *result)
 {
-    qDebug() << message;
+    //qDebug() << message;
+    //pLog->Write("W : "+message);
+    QDateTime date = QDateTime::currentDateTime();  
+    QString now = date.toString("dd-MM-yyyy hh:mm:ss");
+    QFile file("gmail.log");
+    file.open(QFile::WriteOnly | QFile::Append);
+    QTextStream streamText(&file);
+    streamText.setCodec("UTF-8");
+    XEvent *ev;
+    ev = (XEvent *) message;
+    streamText << now << " 11 " <<  ev << " -- " << result << endl;
+    return false;
+}
+
+bool QtGmail::myEventFilter2(QObject * target , QEvent * event)
+{
+    //qDebug() << message;
+    //pLog->Write("W : "+message);
+    QDateTime date = QDateTime::currentDateTime();  
+    QString now = date.toString("dd-MM-yyyy hh:mm:ss");
+    QFile file("gmail.log");
+    file.open(QFile::WriteOnly | QFile::Append);
+    QTextStream streamText(&file);
+    streamText.setCodec("UTF-8");
+    streamText << now << " 22 " <<  event << endl;
+    return true;
+}
+
+bool QtGmail::x11EventFilter(XEvent* event)
+{
+    qDebug() << event;
     return false;
 }
 
 void QtGmail::init()
 {
+    //qxtApp->installNativeEventFilter(&QtGmail);
     qApp->setEventFilter(&QtGmail::myEventFilter);
+    //qApp->setEventFilter(QtGmail::x11EventFilter);
+    qApp->installEventFilter( this ); 
     gmwt->setWindowFlags(Qt::ToolTip);
+    //gmwt->setAttribute(Qt::WA_TranslucentBackground, true);
+    //gmwt->setStyleSheet("background-color: red;border-radius: 10px;border-color: beige;");
     gmwt->init(path);   
     gm->init();
     gm->initLogin(path);

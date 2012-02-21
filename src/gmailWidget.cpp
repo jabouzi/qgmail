@@ -16,7 +16,7 @@ GmailWidget::GmailWidget( QWidget * parent)
 void GmailWidget::init(QString lpath)
 {    
     path = lpath;
-    pLog = new Log(path+"gmail.log");
+    ////pLog = new Log(path+"gmail.log");
     this->setWindowOpacity(opac);    
     label->setTextFormat(Qt::RichText);
     label->setWordWrap(true);
@@ -77,12 +77,12 @@ void GmailWidget::adjustWindow()
     QRect rec2 = desktop->availableGeometry (0);    
     height = 0, x = rec2.width() - width, y = rec2.height() + getTopPanel();    
     setGeometry(x,y,width,height);
-    pLog->Write("W : "+QString::number(width)); 
-    pLog->Write("H : "+QString::number(height)); 
-    pLog->Write("RW1 : "+QString::number(rec1.width())); 
-    pLog->Write("RH1 : "+QString::number(rec1.height())); 
-    pLog->Write("RW2 : "+QString::number(rec2.width())); 
-    pLog->Write("RH2 : "+QString::number(rec2.height())); 
+    //pLog->Write("W : "+QString::number(width)); 
+    //pLog->Write("H : "+QString::number(height)); 
+    //pLog->Write("RW1 : "+QString::number(rec1.width())); 
+    //pLog->Write("RH1 : "+QString::number(rec1.height())); 
+    //pLog->Write("RW2 : "+QString::number(rec2.width())); 
+    //pLog->Write("RH2 : "+QString::number(rec2.height())); 
 }
 
 void GmailWidget::moveWindow()
