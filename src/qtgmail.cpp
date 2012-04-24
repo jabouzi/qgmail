@@ -3,8 +3,6 @@
 #include "qtgmail.h"
 //
 
-//qxtApp->installNativeEventFilter(QtGmail);
-
 QtGmail::QtGmail()    
 {
     path = QCoreApplication::applicationDirPath();
@@ -24,15 +22,7 @@ QtGmail::QtGmail()
 
 void QtGmail::init()
 {
-    //qxtApp->installNativeEventFilter(&QtGmail);
-    //qApp->setEventFilter(&QtGmail::myEventFilter);
-    //qApp->setEventFilter(QtGmail::x11EventFilter);
-    //qApp->installEventFilter( this );
     gmwt->setWindowFlags(Qt::ToolTip );
-    //gmwt->setAttribute(Qt::WA_MacAlwaysShowToolWindow);
-    //this->setAttribute(Qt::WA_MacAlwaysShowToolWindow);
-    //gmwt->setAttribute(Qt::WA_TranslucentBackground, true);
-    //gmwt->setStyleSheet("background-color: red;border-radius: 10px;border-color: beige;");
     gmwt->init(path);   
     gm->init();
     gm->initLogin(path);
@@ -83,9 +73,9 @@ void QtGmail::createTrayIcon()
 
 void QtGmail::showWidget()
 {    
-    //this->activateWindow();
+    #ifdef Q_WS_MAC
     gmwt->raise();
-    //gmwt->activateWindow();
+    #endif
     if (emailsList.size() == 0)
     {
         if (allEmails)
@@ -101,17 +91,17 @@ void QtGmail::showWidget()
 
 void QtGmail::showAboutWidget()
 {
-    //this->activateWindow();
-    //this->raise();
-    //gmwt->activateWindow();
+    #ifdef Q_WS_MAC
     gmwt->raise();
+    #endif
     gmwt->showAboutApp();
 }
 
 void QtGmail::showAboutQtWidget()
 {
-    //this->activateWindow();
+    #ifdef Q_WS_MAC
     gmwt->raise();
+    #endif
     gmwt->showAboutQt();
 }
 
