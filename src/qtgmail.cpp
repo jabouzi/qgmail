@@ -22,49 +22,15 @@ QtGmail::QtGmail()
     init();     
 }
 
-bool QtGmail::myEventFilter(void *message, long *result)
-{
-    //qDebug() << message;
-    //pLog->Write("W : "+message);
-    QDateTime date = QDateTime::currentDateTime();  
-    QString now = date.toString("dd-MM-yyyy hh:mm:ss");
-    QFile file("gmail.log");
-    file.open(QFile::WriteOnly | QFile::Append);
-    QTextStream streamText(&file);
-    streamText.setCodec("UTF-8");
-    XEvent *ev;
-    ev = (XEvent *) message;
-    streamText << now << " 11 " <<  ev << " -- " << result << endl;
-    return false;
-}
-
-bool QtGmail::myEventFilter2(QObject * target , QEvent * event)
-{
-    //qDebug() << message;
-    //pLog->Write("W : "+message);
-    QDateTime date = QDateTime::currentDateTime();  
-    QString now = date.toString("dd-MM-yyyy hh:mm:ss");
-    QFile file("gmail.log");
-    file.open(QFile::WriteOnly | QFile::Append);
-    QTextStream streamText(&file);
-    streamText.setCodec("UTF-8");
-    streamText << now << " 22 " <<  event << endl;
-    return true;
-}
-
-bool QtGmail::x11EventFilter(XEvent* event)
-{
-    qDebug() << event;
-    return false;
-}
-
 void QtGmail::init()
 {
     //qxtApp->installNativeEventFilter(&QtGmail);
-    qApp->setEventFilter(&QtGmail::myEventFilter);
+    //qApp->setEventFilter(&QtGmail::myEventFilter);
     //qApp->setEventFilter(QtGmail::x11EventFilter);
-    qApp->installEventFilter( this ); 
-    gmwt->setWindowFlags(Qt::ToolTip);
+    //qApp->installEventFilter( this );
+    gmwt->setWindowFlags(Qt::ToolTip );
+    //gmwt->setAttribute(Qt::WA_MacAlwaysShowToolWindow);
+    //this->setAttribute(Qt::WA_MacAlwaysShowToolWindow);
     //gmwt->setAttribute(Qt::WA_TranslucentBackground, true);
     //gmwt->setStyleSheet("background-color: red;border-radius: 10px;border-color: beige;");
     gmwt->init(path);   
@@ -117,6 +83,9 @@ void QtGmail::createTrayIcon()
 
 void QtGmail::showWidget()
 {    
+    //this->activateWindow();
+    gmwt->raise();
+    //gmwt->activateWindow();
     if (emailsList.size() == 0)
     {
         if (allEmails)
@@ -132,11 +101,17 @@ void QtGmail::showWidget()
 
 void QtGmail::showAboutWidget()
 {
+    //this->activateWindow();
+    //this->raise();
+    //gmwt->activateWindow();
+    gmwt->raise();
     gmwt->showAboutApp();
 }
 
 void QtGmail::showAboutQtWidget()
 {
+    //this->activateWindow();
+    gmwt->raise();
     gmwt->showAboutQt();
 }
 

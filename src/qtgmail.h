@@ -19,14 +19,14 @@ class QtGmail : public QWidget
 Q_OBJECT     
 public:
     QtGmail();
-    bool x11EventFilter(XEvent* event);
+    //bool x11EventFilter(XEvent* event);
     
 private:        
     void init();
     void createActions();
     void createTrayIcon();
     void startTimer();
-    static bool myEventFilter(void *message, long *result);    
+    //static bool myEventFilter(void *message, long *result);
 
     //QCoreApplication::EventFilter myEventFilter
     QSystemTrayIcon *trayIcon;
@@ -47,7 +47,7 @@ private:
     Phonon::MediaObject *music;
     Log *pLog;
 protected:
-    bool myEventFilter2(QObject * target , QEvent * event);
+    //bool myEventFilter2(QObject * target , QEvent * event);
     
 private slots:
     void showWidget();
