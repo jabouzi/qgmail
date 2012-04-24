@@ -27,10 +27,11 @@ void Gmail::initLogin(QString path)
 void Gmail::connection()
 {    
     init();    
-    qDebug() << 1234 ;
+    qDebug() << 1234 << username << password;
     http.setHost("mail.google.com", QHttp::ConnectionModeHttps);
     http.setUser(username, password);
     http.get("/mail/feed/atom");    
+    qDebug() << 999 << username << password;
 }
 
 void Gmail::readData(const QHttpResponseHeader &resp)
