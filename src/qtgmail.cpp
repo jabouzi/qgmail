@@ -81,6 +81,9 @@ void QtGmail::showWidget()
             gmwt->raise();
             #endif
             gmwt->showNoEmailsWidget();
+            #ifdef Q_WS_MAC
+            gmwt->lower();
+            #endif
         }
     }
     else
@@ -89,6 +92,9 @@ void QtGmail::showWidget()
         gmwt->raise();
         #endif
         gmwt->showWidget();
+        #ifdef Q_WS_MAC
+        gmwt->lower();
+        #endif
     }
 }
 
@@ -98,6 +104,9 @@ void QtGmail::showAboutWidget()
     gmwt->raise();
     #endif
     gmwt->showAboutApp();
+    #ifdef Q_WS_MAC
+    gmwt->lower();
+    #endif
 }
 
 void QtGmail::showAboutQtWidget()
@@ -106,6 +115,9 @@ void QtGmail::showAboutQtWidget()
     gmwt->raise();
     #endif
     gmwt->showAboutQt();
+    #ifdef Q_WS_MAC
+    gmwt->lower();
+    #endif
 }
 
 void QtGmail::newEmails()
