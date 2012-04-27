@@ -72,19 +72,22 @@ void QtGmail::createTrayIcon()
 }
 
 void QtGmail::showWidget()
-{    
-    #ifdef Q_WS_MAC
-    gmwt->raise();
-    #endif
+{        
     if (emailsList.size() == 0)
     {
         if (allEmails)
         {
+            #ifdef Q_WS_MAC
+            gmwt->raise();
+            #endif
             gmwt->showNoEmailsWidget();
         }
     }
     else
     {         
+        #ifdef Q_WS_MAC
+        gmwt->raise();
+        #endif
         gmwt->showWidget();
     }
 }

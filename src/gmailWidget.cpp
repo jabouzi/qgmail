@@ -233,9 +233,14 @@ int GmailWidget::getTopPanel()
         j = str.indexOf("Default Value:", j);
         
         int k = 0;
-        k = str.indexOf("Owner:", k);         
+        k = str.indexOf("Owner:", k);   
         
-        topPanel = str.section("", j, k).trimmed().section("",-3,-1).toInt();
+        qDebug() << j << " -- " << k;
+        
+        if ( j > 0 && k > 0)
+        {
+            topPanel = str.section("", j, k).trimmed().section("",-3,-1).toInt();
+        }        
     }
     #endif
     return topPanel;
