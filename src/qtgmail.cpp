@@ -7,7 +7,7 @@ QtGmail::QtGmail()
 {
     path = QCoreApplication::applicationDirPath();
     #ifdef Q_WS_X11
-        path = QDir::homePath()."/.qtgmail";
+        path = QDir::homePath()+"/.qtgmail";
     #endif
     if (path.data()[path.size() - 1] != '/') path += "/";
     qDebug() << path;
