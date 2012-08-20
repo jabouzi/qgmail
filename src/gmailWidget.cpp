@@ -75,8 +75,9 @@ void GmailWidget::adjustWindow()
     height = windowSize.height(); 
     QRect rec1 = desktop->screenGeometry (0);    
     QRect rec2 = desktop->availableGeometry (0);    
-    height = 0, x = rec2.width() - width, y = rec2.height() + getTopPanel();    
+    height = 100, x = rec2.width() - width, y = rec2.height() + getTopPanel();    
     setGeometry(x,y,width,height);
+    qDebug() << "Size" << x << y << width << height;
     //pLog->Write("W : "+QString::number(width)); 
     //pLog->Write("H : "+QString::number(height)); 
     //pLog->Write("RW1 : "+QString::number(rec1.width())); 
@@ -113,6 +114,7 @@ void GmailWidget::moveUp()
     height = height + 11;
     setGeometry(x,y,width,height);   
     startTimer(90); 
+    qDebug() << "Up" << x << y << width << height;
 }
 
 void GmailWidget::moveDown()
@@ -121,6 +123,7 @@ void GmailWidget::moveDown()
     height = height - 11;
     setGeometry(x,y,width,height);
     startTimer(90);
+    qDebug() << "Down" << x << y << width << height;
 }
 
 void GmailWidget::showEmails()
@@ -215,34 +218,34 @@ void GmailWidget::startTimer(int time)
 int GmailWidget::getTopPanel()
 {
     int topPanel = 0;
-    #ifdef Q_WS_X11
-    char * pPath = getenv ("KDE_FULL_SESSION");
-    if (QString(pPath) == NULL)
-    {
-        QProcess gconf;
-        gconf.start("gconftool", QStringList() << "--get" <<  "/schemas/apps/panel/toplevels/size");   
-        
-        gconf.waitForStarted();         
-        gconf.closeWriteChannel();
-        gconf.waitForFinished();
-
-        QByteArray result = gconf.readAll();
-        
-        QString str = QString(result);
-        int j = 0;
-        j = str.indexOf("Default Value:", j);
-        
-        int k = 0;
-        k = str.indexOf("Owner:", k);   
-        
-        qDebug() << j << " -- " << k;
-        
-        if ( j > 0 && k > 0)
-        {
-            topPanel = str.section("", j, k).trimmed().section("",-3,-1).toInt();
-        }        
-    }
-    #endif
+    //~ #ifdef Q_WS_X11
+    //~ char * pPath = getenv ("KDE_FULL_SESSION");
+    //~ if (QString(pPath) == NULL)
+    //~ {
+        //~ QProcess gconf;
+        //~ gconf.start("gconftool", QStringList() << "--get" <<  "/schemas/apps/panel/toplevels/size");   
+        //~ 
+        //~ gconf.waitForStarted();         
+        //~ gconf.closeWriteChannel();
+        //~ gconf.waitForFinished();
+//~ 
+        //~ QByteArray result = gconf.readAll();
+        //~ 
+        //~ QString str = QString(result);
+        //~ int j = 0;
+        //~ j = str.indexOf("Default Value:", j);
+        //~ 
+        //~ int k = 0;
+        //~ k = str.indexOf("Owner:", k);   
+        //~ 
+        //~ qDebug() << j << " -- " << k;
+        //~ 
+        //~ if ( j > 0 && k > 0)
+        //~ {
+            //~ topPanel = str.section("", j, k).trimmed().section("",-3,-1).toInt();
+        //~ }        
+    //~ }
+    //~ #endif
     return topPanel;
 }
 
