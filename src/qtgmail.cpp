@@ -6,6 +6,9 @@
 QtGmail::QtGmail()    
 {
     path = QCoreApplication::applicationDirPath();
+    #ifdef Q_WS_X11
+        path = QDir::homePath()."/.qtgmail";
+    #endif
     if (path.data()[path.size() - 1] != '/') path += "/";
     qDebug() << path;
     trayIcon = new QSystemTrayIcon(this); 
@@ -27,6 +30,11 @@ void QtGmail::init()
     gm->init();
     gm->initLogin(path);
     timer->start(60000);
+    QDir dir(path);
+    if (!dir.exists())
+    {
+        dir.mkpath(path);
+    }
 }
 
 void QtGmail::createActions()
@@ -77,13 +85,13 @@ void QtGmail::showWidget()
     {
         if (allEmails)
         {
-            #ifdef Q_WS_MAC
+            //#ifdef Q_WS_MAC || Q_WS_X11
             gmwt->raise();
-            #endif
+            //#endif
             gmwt->showNoEmailsWidget();
-            #ifdef Q_WS_MAC
+            //#ifdef Q_WS_MAC || Q_WS_X11
             gmwt->lower();
-            #endif
+            //#endif
         }
     }
     else
