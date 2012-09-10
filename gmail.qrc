@@ -4,10 +4,16 @@
 <file>images/gmail1.png</file>
 <file>images/gmail2.png</file>
 <file>images/gmail3.png</file>
+<file>images/gmail0.svg</file>
+<file>images/gmail1.svg</file>
+<file>images/gmail2.svg</file>
+<file>images/gmail3.svg</file>
 <file>images/gmail4.png</file>
 <file>images/qt-gmail.png</file>
 <file>images/qt.png</file>
 <file>images/lock.png</file>
+<file>images/Activity-gmail.svg</file>
+<file>images/gmail.svg</file>
 <file>audio/notify.mp3</file>
 </qresource>
 </RCC> 

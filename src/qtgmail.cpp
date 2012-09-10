@@ -67,7 +67,7 @@ void QtGmail::createActions()
 void QtGmail::createTrayIcon()
 {      
     /*tooltip avec le nombre d'emails*/
-    trayIcon->setIcon(QIcon(":/images/gmail2.png"));
+    trayIcon->setIcon(QIcon(":/images/gmail2.svg"));
     trayIcon->show();    
     trayIcon->setContextMenu(trayIconMenu);    
     trayIconMenu->addAction(viewinbox_action); 
@@ -86,11 +86,11 @@ void QtGmail::showWidget()
         if (allEmails)
         {
             //#ifdef Q_WS_MAC || Q_WS_X11
-            gmwt->raise();
+            //gmwt->raise();
             //#endif
             gmwt->showNoEmailsWidget();
             //#ifdef Q_WS_MAC || Q_WS_X11
-            gmwt->lower();
+            //gmwt->lower();
             //#endif
         }
     }
@@ -108,41 +108,41 @@ void QtGmail::showWidget()
 
 void QtGmail::showAboutWidget()
 {
-    #ifdef Q_WS_MAC
-    gmwt->raise();
-    #endif
+    //#ifdef Q_WS_MAC
+    //gmwt->raise();
+    //#endif
     gmwt->showAboutApp();
-    #ifdef Q_WS_MAC
-    gmwt->lower();
-    #endif
+    //#ifdef Q_WS_MAC
+    //gmwt->lower();
+    //#endif
 }
 
 void QtGmail::showAboutQtWidget()
 {
-    #ifdef Q_WS_MAC
-    gmwt->raise();
-    #endif
+    //#ifdef Q_WS_MAC
+    //gmwt->raise();
+    //#endif
     gmwt->showAboutQt();
-    #ifdef Q_WS_MAC
-    gmwt->lower();
-    #endif
+    //#ifdef Q_WS_MAC
+    //gmwt->lower();
+    //#endif
 }
 
 void QtGmail::newEmails()
 {      
-    trayIcon->setIcon(QIcon(":/images/gmail1.png"));    
+    trayIcon->setIcon(QIcon(":/images/gmail1.svg"));    
     displayNewEmails();    
 }
 
 void QtGmail::noNewEmails()
 {
-    trayIcon->setIcon(QIcon(":/images/gmail2.png"));
+    trayIcon->setIcon(QIcon(":/images/gmail2.svg"));
     trayIcon->setToolTip("Qt-GmailNotifier\nYou don't have new emails");
 }
 
 void QtGmail::noConnection()
 {
-    trayIcon->setIcon(QIcon(":/images/gmail3.png"));
+    trayIcon->setIcon(QIcon(":/images/gmail3.svg"));
     trayIcon->setToolTip("Connection error!");
 }
 
