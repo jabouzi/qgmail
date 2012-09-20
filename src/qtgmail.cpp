@@ -142,7 +142,7 @@ void QtGmail::noNewEmails()
 
 void QtGmail::noConnection()
 {
-    trayIcon->setIcon(QIcon(":/images/gmail3.svg"));
+    trayIcon->setIcon(QIcon(":/images/gmail0.svg"));
     trayIcon->setToolTip("Connection error!");
 }
 

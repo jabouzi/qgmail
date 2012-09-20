@@ -1,8 +1,8 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource prefix="/">   
-<file>images/gmail0.png</file>
-<file>images/gmail1.png</file>
-<file>images/gmail2.png</file>
+<file>images/gmail_0.png</file>
+<file>images/gmail_1.png</file>
+<file>images/gmail_2.png</file>
 <file>images/gmail3.png</file>
 <file>images/gmail0.svg</file>
 <file>images/gmail1.svg</file>
